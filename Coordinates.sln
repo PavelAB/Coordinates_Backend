@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coordinates_API", "Coordinates_API\Coordinates_API.csproj", "{D467D041-E992-4248-90A9-997F92A09CB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_API", "Coordinates_API\Coordinates_API.csproj", "{D467D041-E992-4248-90A9-997F92A09CB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coordinates_CQS_Domain", "Coordinates_CQS_Domain\Coordinates_CQS_Domain.csproj", "{E981B87B-FC1B-4B01-983C-7D80931AED65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_CQS_Domain", "Coordinates_CQS_Domain\Coordinates_CQS_Domain.csproj", "{E981B87B-FC1B-4B01-983C-7D80931AED65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coordinates_TestConsole", "Coordinates_TestConsole\Coordinates_TestConsole.csproj", "{F38E166C-C585-4835-90B7-833647091FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_TestConsole", "Coordinates_TestConsole\Coordinates_TestConsole.csproj", "{F38E166C-C585-4835-90B7-833647091FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coordiantes_Tools", "Coordiantes_Tools\Coordiantes_Tools.csproj", "{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordiantes_Tools", "Coordiantes_Tools\Coordiantes_Tools.csproj", "{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Coordinates_DataBase", "Coordinates_DataBase\Coordinates_DataBase.sqlproj", "{8A9F0F3D-866B-4575-83FE-C446D50ECACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,12 @@ Global
 		{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
