@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_API", "Coordina
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_CQS_Domain", "Coordinates_CQS_Domain\Coordinates_CQS_Domain.csproj", "{E981B87B-FC1B-4B01-983C-7D80931AED65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_TestConsole", "Coordinates_TestConsole\Coordinates_TestConsole.csproj", "{F38E166C-C585-4835-90B7-833647091FAF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordiantes_Tools", "Coordiantes_Tools\Coordiantes_Tools.csproj", "{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Coordinates_DataBase", "Coordinates_DataBase\Coordinates_DataBase.sqlproj", "{8A9F0F3D-866B-4575-83FE-C446D50ECACF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_ConsoleTest", "Coordinates_ConsoleTest\Coordinates_ConsoleTest.csproj", "{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,6 @@ Global
 		{E981B87B-FC1B-4B01-983C-7D80931AED65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E981B87B-FC1B-4B01-983C-7D80931AED65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E981B87B-FC1B-4B01-983C-7D80931AED65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F38E166C-C585-4835-90B7-833647091FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F38E166C-C585-4835-90B7-833647091FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F38E166C-C585-4835-90B7-833647091FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F38E166C-C585-4835-90B7-833647091FAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EC9F01F-E78F-48F7-B025-4E84C28E3D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,6 +37,10 @@ Global
 		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
