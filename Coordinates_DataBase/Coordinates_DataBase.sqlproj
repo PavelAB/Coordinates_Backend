@@ -64,11 +64,13 @@
     <Build Include="Tables\User.sql" />
     <Build Include="Tables\Spot.sql" />
     <Build Include="Procedures\CreateSpot.sql" />
+    <Build Include="Tables\Track.sql" />
+    <Build Include="Procedures\CreateTrack.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Data\LoadDbTest.sql" />
+    <None Include="Data\LoadDbTest.sql" />
   </ItemGroup>
 </Project>

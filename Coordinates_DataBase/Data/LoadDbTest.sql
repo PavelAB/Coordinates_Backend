@@ -23,3 +23,7 @@ INSERT INTO [User] (FirstName, LastName, NickName, Login, Email, Password) VALUE
 -- Create Spot
 
 EXEC dbo.CreateSpot
+
+-- Create Track
+
+EXEC dbo.CreateTrack
