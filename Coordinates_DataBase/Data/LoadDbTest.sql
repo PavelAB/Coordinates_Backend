@@ -55,4 +55,8 @@ EXEC dbo.CreateTrack @Distance = 1000.89, @Elevation = 100.05
 
 -- Create PolyLine
 
-Exec dbo.CreatePolyLine
+EXEC dbo.CreatePolyLine
+
+-- Create SpotValidation
+
+EXEC dbo.CreateSpotValidation
