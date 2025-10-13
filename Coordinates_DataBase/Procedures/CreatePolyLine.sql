@@ -11,9 +11,9 @@ BEGIN
 	IF @IdTrack IS NULL
 		SELECT TOP 1 @IdTrack = IdTrack FROM [Track];
 
-	INSERT INTO [PolyLine] ([IdSpot], [IdTrack], [Order]) VALUES 
+	INSERT INTO [MM_PolyLine] ([IdSpot], [IdTrack], [Order]) VALUES 
 		(@IdSpot1, @IdTrack, 1);
-	INSERT INTO [PolyLine] ([IdSpot], [IdTrack], [Order]) VALUES 
+	INSERT INTO [MM_PolyLine] ([IdSpot], [IdTrack], [Order]) VALUES 
 		(@IdSpot2, @IdTrack, 2);
 END
 GO

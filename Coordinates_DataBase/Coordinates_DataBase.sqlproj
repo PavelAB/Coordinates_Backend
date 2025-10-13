@@ -66,9 +66,9 @@
     <Build Include="Procedures\CreateSpot.sql" />
     <Build Include="Tables\Track.sql" />
     <Build Include="Procedures\CreateTrack.sql" />
-    <Build Include="Tables\PolyLine.sql" />
+    <Build Include="Tables\MM_PolyLine.sql" />
     <Build Include="Procedures\CreatePolyLine.sql" />
-    <Build Include="Tables\EntityType.sql" />
+    <Build Include="Tables\MM_EntityType.sql" />
     <Build Include="Procedures\CreateEntityType.sql" />
   </ItemGroup>
   <ItemGroup>
