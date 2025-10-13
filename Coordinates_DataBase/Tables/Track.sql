@@ -7,8 +7,6 @@
 	-- END
 	[IsDeleted] BIT NOT NULL DEFAULT 0,
 	[IsPrivate] BIT NOT NULL DEFAULT 0,
-	-- FK IdPolyLine manyToOne, change not null
-	[IdPolyLine] UNIQUEIDENTIFIER NULL,
 	[PolyLine] NVARCHAR(Max) NOT NULL,
 	-- FK EntityType manyToOne, change not null, constaint default value 'None'
 	[IdEntityType] UNIQUEIDENTIFIER NULL,
