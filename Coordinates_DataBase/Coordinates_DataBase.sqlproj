@@ -68,6 +68,8 @@
     <Build Include="Procedures\CreateTrack.sql" />
     <Build Include="Tables\PolyLine.sql" />
     <Build Include="Procedures\CreatePolyLine.sql" />
+    <Build Include="Tables\EntityType.sql" />
+    <Build Include="Procedures\CreateEntityType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />

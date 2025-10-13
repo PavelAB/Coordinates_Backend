@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[EntityType]
+(
+	[IdEntityType] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
+	[Name] NVARCHAR(50) NOT NULL,
+	CONSTRAINT [UQ_NAME] UNIQUE ([Name]), 
+	CONSTRAINT [PK_EntityType] PRIMARY KEY ([IdEntityType])
+)

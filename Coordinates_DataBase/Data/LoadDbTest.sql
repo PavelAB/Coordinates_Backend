@@ -10,6 +10,14 @@ Modèle de script de post-déploiement
 --------------------------------------------------------------------------------------
 */
 
+-- Create EntityType
+
+EXEC dbo.CreateEntityType @Name = 'Cyclist'
+EXEC dbo.CreateEntityType @Name = 'Runner'
+EXEC dbo.CreateEntityType @Name = 'Hiking'
+EXEC dbo.CreateEntityType @Name = 'Tourist'
+
+
 -- Create User
 
 INSERT INTO [User] (FirstName, LastName, NickName, Login, Email, Password) VALUES (
