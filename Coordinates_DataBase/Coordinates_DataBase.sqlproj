@@ -82,6 +82,8 @@
     <Build Include="Procedures\CreateTrackValidation.sql" />
     <Build Include="Tables\Comment.sql" />
     <Build Include="Procedures\CreateComment.sql" />
+    <Build Include="Tables\MM_Comment_Spot.sql" />
+    <Build Include="Procedures\CreateCommentSpot.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
