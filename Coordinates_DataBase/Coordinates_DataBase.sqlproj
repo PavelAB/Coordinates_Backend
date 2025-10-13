@@ -80,6 +80,8 @@
     <Build Include="Procedures\CreateFavoriteTrack.sql" />
     <Build Include="Tables\MM_TrackValidation.sql" />
     <Build Include="Procedures\CreateTrackValidation.sql" />
+    <Build Include="Tables\Comment.sql" />
+    <Build Include="Procedures\CreateComment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />

@@ -72,3 +72,7 @@ EXEC dbo.CreateFavoriteTrack
 -- Create TrackValidation
 
 EXEC dbo.CreateTrackValidation
+
+-- Create Comment
+
+EXEC dbo.CreateComment @Body = 'My best comment';
