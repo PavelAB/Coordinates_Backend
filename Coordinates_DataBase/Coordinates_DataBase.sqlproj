@@ -66,11 +66,13 @@
     <Build Include="Procedures\CreateSpot.sql" />
     <Build Include="Tables\Track.sql" />
     <Build Include="Procedures\CreateTrack.sql" />
+    <Build Include="Tables\PolyLine.sql" />
+    <Build Include="Procedures\CreatePolyLine.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\LoadDbTest.sql" />
+    <PostDeploy Include="Data\LoadDbTest.sql" />
   </ItemGroup>
 </Project>

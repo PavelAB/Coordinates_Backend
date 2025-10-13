@@ -23,7 +23,18 @@ INSERT INTO [User] (FirstName, LastName, NickName, Login, Email, Password) VALUE
 -- Create Spot
 
 EXEC dbo.CreateSpot
+    @Latitude = 100.56,
+	@Longitude = 90.56,
+	@Elevation = 899.56
+EXEC dbo.CreateSpot
+    @Latitude = 110.56,
+	@Longitude = 80,
+	@Elevation = 999.56
 
 -- Create Track
 
 EXEC dbo.CreateTrack
+
+-- Create PolyLine
+
+Exec dbo.CreatePolyLine
