@@ -64,3 +64,7 @@ EXEC dbo.CreateSpotValidation
 -- Create FavoriteSpot
 
 EXEC dbo.CreateFavoriteSpot
+
+-- Create FavoriteTrack
+
+EXEC dbo.CreateFavoriteTrack

@@ -76,6 +76,8 @@
     <Build Include="Procedures\CreateSpotValidation.sql" />
     <Build Include="Tables\MM_FavoriteSpot.sql" />
     <Build Include="Procedures\CreateFavoriteSpot.sql" />
+    <Build Include="Tables\MM_FavoriteTrack.sql" />
+    <Build Include="Procedures\CreateFavoriteTrack.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
