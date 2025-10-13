@@ -74,6 +74,8 @@
     <Build Include="Procedures\CreateSurfaceType.sql" />
     <Build Include="Tables\MM_SpotValidation.sql" />
     <Build Include="Procedures\CreateSpotValidation.sql" />
+    <Build Include="Tables\MM_FavoriteSpot.sql" />
+    <Build Include="Procedures\CreateFavoriteSpot.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />

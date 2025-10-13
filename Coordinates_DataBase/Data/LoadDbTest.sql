@@ -60,3 +60,7 @@ EXEC dbo.CreatePolyLine
 -- Create SpotValidation
 
 EXEC dbo.CreateSpotValidation
+
+-- Create FavoriteSpot
+
+EXEC dbo.CreateFavoriteSpot
