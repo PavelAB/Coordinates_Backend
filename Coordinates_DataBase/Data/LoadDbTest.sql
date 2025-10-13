@@ -18,6 +18,14 @@ EXEC dbo.CreateEntityType @Name = 'Hiking'
 EXEC dbo.CreateEntityType @Name = 'Tourist'
 
 
+-- Create SurfaceType
+
+EXEC dbo.CreateSurfaceType @SurfaceType = 'Asphalt'
+EXEC dbo.CreateSurfaceType @SurfaceType = 'Gravel'
+EXEC dbo.CreateSurfaceType @SurfaceType = 'Concrete'
+EXEC dbo.CreateSurfaceType @SurfaceType = 'Dirt'
+
+
 -- Create User
 
 INSERT INTO [User] (FirstName, LastName, NickName, Login, Email, Password) VALUES (
