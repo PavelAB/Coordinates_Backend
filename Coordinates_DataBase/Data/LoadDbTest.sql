@@ -12,6 +12,7 @@ Modèle de script de post-déploiement
 
 -- Create EntityType
 
+EXEC dbo.CreateEntityType @Name = 'No Information'
 EXEC dbo.CreateEntityType @Name = 'Cyclist'
 EXEC dbo.CreateEntityType @Name = 'Runner'
 EXEC dbo.CreateEntityType @Name = 'Hiking'
@@ -20,6 +21,7 @@ EXEC dbo.CreateEntityType @Name = 'Tourist'
 
 -- Create SurfaceType
 
+EXEC dbo.CreateSurfaceType @SurfaceType = 'No Information'
 EXEC dbo.CreateSurfaceType @SurfaceType = 'Asphalt'
 EXEC dbo.CreateSurfaceType @SurfaceType = 'Gravel'
 EXEC dbo.CreateSurfaceType @SurfaceType = 'Concrete'
@@ -39,11 +41,11 @@ INSERT INTO [User] (FirstName, LastName, NickName, Login, Email, Password) VALUE
 -- Create Spot
 
 EXEC dbo.CreateSpot
-    @Latitude = 100.56,
+    @Latitude = 89.56,
 	@Longitude = 90.56,
 	@Elevation = 899.56
 EXEC dbo.CreateSpot
-    @Latitude = 110.56,
+    @Latitude = 79.56,
 	@Longitude = 80,
 	@Elevation = 999.56
 
