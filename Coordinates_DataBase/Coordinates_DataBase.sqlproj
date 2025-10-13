@@ -78,6 +78,8 @@
     <Build Include="Procedures\CreateFavoriteSpot.sql" />
     <Build Include="Tables\MM_FavoriteTrack.sql" />
     <Build Include="Procedures\CreateFavoriteTrack.sql" />
+    <Build Include="Tables\MM_TrackValidation.sql" />
+    <Build Include="Procedures\CreateTrackValidation.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
