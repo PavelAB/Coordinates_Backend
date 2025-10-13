@@ -72,6 +72,7 @@
     <Build Include="Procedures\CreateEntityType.sql" />
     <Build Include="Tables\MM_SurfaceType.sql" />
     <Build Include="Procedures\CreateSurfaceType.sql" />
+    <Build Include="Tables\MM_SpotValidation.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
