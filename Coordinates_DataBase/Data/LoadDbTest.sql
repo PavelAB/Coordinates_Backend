@@ -84,3 +84,7 @@ EXEC dbo.CreateCommentSpot
 -- Create CommentTrack
 
 EXEC dbo.CreateCommentTrack
+
+-- Create Like
+
+EXEC dbo.CreateLike

@@ -87,6 +87,7 @@
     <Build Include="Tables\MM_Comment_Track.sql" />
     <Build Include="Procedures\CreateCommentTrack.sql" />
     <Build Include="Tables\MM_Liked.sql" />
+    <Build Include="Procedures\CreateLike.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
