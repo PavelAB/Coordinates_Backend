@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Coordiantes_Tools\Coordiantes_Tools.csproj" />
+  </ItemGroup>
+
 </Project>
