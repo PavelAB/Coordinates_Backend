@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordiantes_Tools", "Coordi
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Coordinates_DataBase", "Coordinates_DataBase\Coordinates_DataBase.sqlproj", "{8A9F0F3D-866B-4575-83FE-C446D50ECACF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_ConsoleTest", "Coordinates_ConsoleTest\Coordinates_ConsoleTest.csproj", "{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coordinates_ConsoleTest", "Coordinates_ConsoleTest\Coordinates_ConsoleTest.csproj", "{1B21DA2C-5371-43DC-8C06-3559AC74A565}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,10 @@ Global
 		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A9F0F3D-866B-4575-83FE-C446D50ECACF}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8855B6DE-92B5-4077-BCA9-F5648AC9D26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B21DA2C-5371-43DC-8C06-3559AC74A565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B21DA2C-5371-43DC-8C06-3559AC74A565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B21DA2C-5371-43DC-8C06-3559AC74A565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B21DA2C-5371-43DC-8C06-3559AC74A565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
