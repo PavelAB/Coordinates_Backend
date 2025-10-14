@@ -95,4 +95,8 @@ EXEC dbo.CreateRating @Score = 8;
 
 -- Create RatingSpot
 
-Exec dbo.CreateRatingSpot;
+EXEC dbo.CreateRatingSpot;
+
+-- Create RatingTrack
+
+EXEC dbo.CreateRatingTrack;
