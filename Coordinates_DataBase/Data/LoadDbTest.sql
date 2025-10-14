@@ -80,3 +80,7 @@ EXEC dbo.CreateComment @Body = 'My best comment';
 -- Create CommentSpot
 
 EXEC dbo.CreateCommentSpot
+
+-- Create CommentTrack
+
+EXEC dbo.CreateCommentTrack
