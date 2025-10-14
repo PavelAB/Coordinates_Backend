@@ -59,6 +59,7 @@
     <Folder Include="Tables" />
     <Folder Include="Data" />
     <Folder Include="Procedures" />
+    <Folder Include="Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />

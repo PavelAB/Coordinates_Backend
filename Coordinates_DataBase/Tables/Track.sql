@@ -2,7 +2,8 @@
 (
 	[IdTrack] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(), 
 	[Distance] DECIMAL(8,2) NOT NULL,
-	[Elevation] Decimal(8,2) NOT NULL,
+	[Elevation] DECIMAL(8,2) NOT NULL,
+	[Name] NVARCHAR(50) NOT NULL DEFAULT ('Default_Name_' + LEFT(CONVERT(NVARCHAR(36), NEWID()), 8)),
 	[IsDeleted] BIT NOT NULL DEFAULT 0,
 	[IsPrivate] BIT NOT NULL DEFAULT 0,
 	[PolyLine] NVARCHAR(Max) NOT NULL,
