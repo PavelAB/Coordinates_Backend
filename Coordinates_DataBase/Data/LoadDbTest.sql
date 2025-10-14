@@ -88,3 +88,7 @@ EXEC dbo.CreateCommentTrack
 -- Create Like
 
 EXEC dbo.CreateLike
+
+-- Create Rating
+
+EXEC dbo.CreateRating @Score = 8;
