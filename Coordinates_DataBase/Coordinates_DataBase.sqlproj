@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{8a9f0f3d-866b-4575-83fe-c446d50ecacf}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -56,5 +56,50 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Data" />
+    <Folder Include="Procedures" />
+    <Folder Include="Functions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\Spot.sql" />
+    <Build Include="Procedures\CreateSpot.sql" />
+    <Build Include="Tables\Track.sql" />
+    <Build Include="Procedures\CreateTrack.sql" />
+    <Build Include="Tables\MM_PolyLine.sql" />
+    <Build Include="Procedures\CreatePolyLine.sql" />
+    <Build Include="Tables\MM_EntityType.sql" />
+    <Build Include="Procedures\CreateEntityType.sql" />
+    <Build Include="Tables\MM_SurfaceType.sql" />
+    <Build Include="Procedures\CreateSurfaceType.sql" />
+    <Build Include="Tables\MM_SpotValidation.sql" />
+    <Build Include="Procedures\CreateSpotValidation.sql" />
+    <Build Include="Tables\MM_FavoriteSpot.sql" />
+    <Build Include="Procedures\CreateFavoriteSpot.sql" />
+    <Build Include="Tables\MM_FavoriteTrack.sql" />
+    <Build Include="Procedures\CreateFavoriteTrack.sql" />
+    <Build Include="Tables\MM_TrackValidation.sql" />
+    <Build Include="Procedures\CreateTrackValidation.sql" />
+    <Build Include="Tables\Comment.sql" />
+    <Build Include="Procedures\CreateComment.sql" />
+    <Build Include="Tables\MM_Comment_Spot.sql" />
+    <Build Include="Procedures\CreateCommentSpot.sql" />
+    <Build Include="Tables\MM_Comment_Track.sql" />
+    <Build Include="Procedures\CreateCommentTrack.sql" />
+    <Build Include="Tables\MM_Liked.sql" />
+    <Build Include="Procedures\CreateLike.sql" />
+    <Build Include="Tables\Rating.sql" />
+    <Build Include="Procedures\CreateRating.sql" />
+    <Build Include="Tables\MM_Rating_Spot.sql" />
+    <Build Include="Procedures\CreateRatingSpot.sql" />
+    <Build Include="Tables\MM_Rating_Track.sql" />
+    <Build Include="Procedures\CreateRatingTrack.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Coordinates_DataBase.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Data\LoadDbTest.sql" />
   </ItemGroup>
 </Project>
