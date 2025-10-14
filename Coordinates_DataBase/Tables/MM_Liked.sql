@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[MM_Liked]
+(
+	[IdComment] UNIQUEIDENTIFIER NOT NULL, 
+	[IdUser] UNIQUEIDENTIFIER NOT NULL,
+	[Like] BIT NULL DEFAULT 1,
+	[IsDeleted] BIT NOT NULL DEFAULT 0,
+	[CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(),
+	[UpdatedAt] DATETIME2 NULL,
+	[DeletedAt] DATETIME2 NULL,
+	CONSTRAINT [PK_Liked] PRIMARY KEY ([IdComment], [IdUser]),
+	CONSTRAINT [FK_Liked_Comment] FOREIGN KEY ([IdComment]) REFERENCES [Comment]([IdComment]),
+	CONSTRAINT [FK_Liked_User] FOREIGN KEY ([IdUser]) REFERENCES [User]([IdUser])
+)

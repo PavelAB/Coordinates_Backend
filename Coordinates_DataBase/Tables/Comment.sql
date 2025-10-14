@@ -1,0 +1,17 @@
+﻿CREATE TABLE [dbo].[Comment]
+(
+	[IdComment] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
+	[Body] NVARCHAR(MAX) NOT NULL,
+	[IsDeleted] BIT NOT NULL DEFAULT 0,
+	[CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(),
+	[UpdatedAt] DATETIME2 NULL,
+	[DeletedAt] DATETIME2 NULL,
+	[CreatedBy] UNIQUEIDENTIFIER NOT NULL,
+	[UpdatedBy] UNIQUEIDENTIFIER NULL,
+	[DeletedBy] UNIQUEIDENTIFIER NULL,
+	CONSTRAINT [PK_Comment] PRIMARY KEY ([IdComment]),
+	CONSTRAINT [FK_Comment_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [User]([IdUser]),
+	CONSTRAINT [FK_Comment_UpdatedBy] FOREIGN KEY ([UpdatedBy]) REFERENCES [User]([IdUser]),
+	CONSTRAINT [FK_Comment_DeletedBy] FOREIGN KEY ([DeletedBy]) REFERENCES [User]([IdUser])
+
+)
