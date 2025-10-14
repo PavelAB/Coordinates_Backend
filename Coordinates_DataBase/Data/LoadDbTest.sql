@@ -92,3 +92,7 @@ EXEC dbo.CreateLike
 -- Create Rating
 
 EXEC dbo.CreateRating @Score = 8;
+
+-- Create RatingSpot
+
+Exec dbo.CreateRatingSpot;

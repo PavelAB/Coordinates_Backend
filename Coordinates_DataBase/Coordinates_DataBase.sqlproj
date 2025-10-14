@@ -90,6 +90,8 @@
     <Build Include="Procedures\CreateLike.sql" />
     <Build Include="Tables\Rating.sql" />
     <Build Include="Procedures\CreateRating.sql" />
+    <Build Include="Tables\MM_Rating_Spot.sql" />
+    <Build Include="Procedures\CreateRatingSpot.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
