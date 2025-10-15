@@ -1,4 +1,5 @@
 ﻿using Coordinates_API.Tools;
+using Coordinates_CQS_Domain.Commands;
 using Coordinates_CQS_Domain.Repositories;
 using Coordinates_CQS_Domain.Services;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +23,12 @@ namespace Coordinates_ConsoleTest
 
             IAuthRepository authRepository = serviceProvider.GetService<IAuthRepository>();
 
+            #region Create User
 
+            //CreateUserComand newUser = new("WorsePerson", "Bad2", "bad@world2.net", "0000");
+            //authRepository.Execute(newUser);
+
+            #endregion
         }
     }
 }

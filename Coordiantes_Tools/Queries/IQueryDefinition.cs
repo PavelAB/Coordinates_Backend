@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Coordiantes_Tools.Queries
 {
-    internal interface IQueryDefinition<TResult>
+    public interface IQueryDefinition<TResult>
     {
     }
 }
