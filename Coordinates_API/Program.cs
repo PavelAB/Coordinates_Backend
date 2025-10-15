@@ -1,4 +1,7 @@
 
+using Coordinates_API.Tools;
+using Coordinates_CQS_Domain.Services;
+
 namespace Coordinates_API
 {
     public class Program
@@ -13,6 +16,8 @@ namespace Coordinates_API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<EnvConfig>();
+            builder.Services.AddScoped<AuthService>();
 
             var app = builder.Build();
 

@@ -8,5 +8,6 @@ namespace Coordinates_CQS_Domain.Repositories
 {
     public interface IAuthRepository
     {
+        
     }
 }

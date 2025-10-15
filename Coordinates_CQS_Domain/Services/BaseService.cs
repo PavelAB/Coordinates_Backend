@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Coordinates_API.Tools;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,10 @@ namespace Coordinates_CQS_Domain.Services
     public class BaseService
     {
         protected readonly string _connectonString;
-        public BaseService(IConfiguration configuration, string connectionString)
+        public BaseService(EnvConfig env)
         {
-            _connectonString = configuration.GetConnectionString(connectionString);
+            _connectonString = env.Get("CONNECTION_STRING");
+
         }
     }
 }
