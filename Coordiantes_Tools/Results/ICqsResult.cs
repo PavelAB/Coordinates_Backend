@@ -23,9 +23,17 @@ namespace Coordiantes_Tools.Results
     }
     public interface ICqsResult<TResult>
     {
+        static ICqsResult<TResult> Success(TResult? content)
+        {
+            return new Result<TResult>(true, content, null);
+        }
+        static ICqsResult<TResult> Failure(string errorMessage)
+        {
+            return new Result<TResult>(false, default, errorMessage);
+        }
         bool IsSuccess { get; }
         bool IsFailure { get; }
         string ErrorMessage { get; }
-        TResult Data { get; }
+        TResult Content{ get; }
     }
 }

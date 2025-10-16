@@ -10,10 +10,10 @@ namespace Coordiantes_Tools.Results
     {
 
         public bool IsSuccess { get; }
-        public bool IsFailure { get 
-            { 
+        public bool IsFailure { get
+            {
                 return !IsSuccess;
-            } 
+            }
         }
         public string? ErrorMessage { get; }
 
@@ -23,4 +23,31 @@ namespace Coordiantes_Tools.Results
             ErrorMessage = errorMessage;
         }
     }
+
+    internal class Result<TResult> : ICqsResult<TResult>
+    {
+        private readonly TResult? _content;
+
+        public bool IsSuccess { get; }
+        public bool IsFailure { get { return !IsSuccess; } }
+        public string? ErrorMessage { get; }
+        public TResult? Content 
+        {
+            get 
+            {
+                if (IsFailure)
+                    throw new InvalidOperationException();
+
+                return _content;
+            } 
+        }
+        internal Result(bool isSuccess, TResult? content, string? errorMessage)
+        {
+            IsSuccess = isSuccess;
+            _content = content;
+            ErrorMessage = errorMessage;
+        }
+    }
+
+
 }

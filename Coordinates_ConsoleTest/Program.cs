@@ -1,5 +1,7 @@
-﻿using Coordinates_API.Tools;
-using Coordinates_CQS_Domain.Commands;
+﻿using Coordiantes_Tools.Results;
+using Coordinates_API.Tools;
+using Coordinates_CQS_Domain.Commands.Users;
+using Coordinates_CQS_Domain.Entities.User;
 using Coordinates_CQS_Domain.Repositories;
 using Coordinates_CQS_Domain.Services;
 using Microsoft.Extensions.Configuration;
@@ -25,9 +27,16 @@ namespace Coordinates_ConsoleTest
 
             #region Create User
 
-            //CreateUserComand newUser = new("WorsePerson", "Bad2", "bad@world2.net", "0000");
-            //authRepository.Execute(newUser);
+            CreateUserCommand newUser = new("WorsePerson", "Bad2", "bad@world2.net", "0000");
+            authRepository.Execute(newUser);
 
+            #endregion
+
+            #region CheckPassword
+
+            CheckPasswordCommand checkPasswordCommand = new("Bad2", "0000");
+            ICqsResult<User> result = authRepository.Execute(checkPasswordCommand);
+            
             #endregion
         }
     }
