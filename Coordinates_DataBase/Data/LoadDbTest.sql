@@ -30,13 +30,12 @@ EXEC dbo.CreateSurfaceType @SurfaceType = 'Dirt'
 
 -- Create User
 
-INSERT INTO [User] (FirstName, LastName, NickName, Login, Email, Password) VALUES (
-    'Pavel',
-    'Bezukladnikov',
-    'BestNick',
-    'B.pavel',
-    'Test@test.com',
-    'TestPassword');
+EXEC dbo.SP_User_Create 
+    @nickName = 'BestNick', 
+    @email = 'Test@test.com',
+    @login = 'B.pavel',
+    @userPassword = 'TestPassword';
+
 
 -- Create Spot
 

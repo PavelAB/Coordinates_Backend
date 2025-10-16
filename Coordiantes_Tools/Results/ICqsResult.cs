@@ -6,17 +6,34 @@ using System.Threading.Tasks;
 
 namespace Coordiantes_Tools.Results
 {
-    internal interface ICqsResult
+    public interface ICqsResult
     {
+        static ICqsResult Success()
+        {
+            return new Result(true, null);
+        }
+        static ICqsResult Failure(string errorMessage)
+        {
+            return new Result(false, errorMessage);
+        }
+
         bool IsSuccess { get; }
         bool IsFailure {  get; }
         string ErrorMessage { get; }
     }
-    internal interface ICqsResult<TResult>
+    public interface ICqsResult<TResult>
     {
+        static ICqsResult<TResult> Success(TResult? content)
+        {
+            return new Result<TResult>(true, content, null);
+        }
+        static ICqsResult<TResult> Failure(string errorMessage)
+        {
+            return new Result<TResult>(false, default, errorMessage);
+        }
         bool IsSuccess { get; }
         bool IsFailure { get; }
         string ErrorMessage { get; }
-        TResult Data { get; }
+        TResult Content{ get; }
     }
 }

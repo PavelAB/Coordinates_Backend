@@ -95,11 +95,14 @@
     <Build Include="Procedures\CreateRatingSpot.sql" />
     <Build Include="Tables\MM_Rating_Track.sql" />
     <Build Include="Procedures\CreateRatingTrack.sql" />
+    <Build Include="Procedures\SP_User_Create.sql" />
+    <Build Include="Functions\SF_HashPassword.sql" />
+    <Build Include="Procedures\SP_User_CheckPassword.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Data\LoadDbTest.sql" />
+    <None Include="Data\LoadDbTest.sql" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Coordiantes_Tools.Commands
 {
-    internal interface ICommandHandler<TCommand>
+    public interface ICommandHandler<TCommand>
         where TCommand: ICommandDefinition
     {
         ICqsResult Execute(TCommand command);
