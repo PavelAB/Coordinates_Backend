@@ -98,11 +98,15 @@
     <Build Include="Procedures\SP_User_Create.sql" />
     <Build Include="Functions\SF_HashPassword.sql" />
     <Build Include="Procedures\SP_User_CheckPassword.sql" />
+    <Build Include="Procedures\SP_Spot_Create.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\LoadDbTest.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Data\TestProcedures.sql" />
   </ItemGroup>
 </Project>
