@@ -69,9 +69,9 @@
     <Build Include="Procedures\CreateTrack.sql" />
     <Build Include="Tables\MM_PolyLine.sql" />
     <Build Include="Procedures\CreatePolyLine.sql" />
-    <Build Include="Tables\MM_EntityType.sql" />
+    <Build Include="Tables\EntityType.sql" />
     <Build Include="Procedures\CreateEntityType.sql" />
-    <Build Include="Tables\MM_SurfaceType.sql" />
+    <Build Include="Tables\Surface.sql" />
     <Build Include="Procedures\CreateSurfaceType.sql" />
     <Build Include="Tables\MM_SpotValidation.sql" />
     <Build Include="Procedures\CreateSpotValidation.sql" />
@@ -99,6 +99,10 @@
     <Build Include="Functions\SF_HashPassword.sql" />
     <Build Include="Procedures\SP_User_CheckPassword.sql" />
     <Build Include="Procedures\SP_Spot_Create.sql" />
+    <Build Include="Tables\MM_Spot_Surface.sql" />
+    <Build Include="Tables\MM_Spot_EntityType.sql" />
+    <Build Include="Tables\MM_Track_Surface.sql" />
+    <Build Include="Tables\MM_Track_EntityType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
@@ -107,6 +111,7 @@
     <None Include="Data\LoadDbTest.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Data\TestProcedures.sql" />
+    <None Include="Data\TestProcedures.sql" />
+    <None Include="Data\FixDesignError.sql" />
   </ItemGroup>
 </Project>

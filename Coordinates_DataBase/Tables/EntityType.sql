@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[MM_EntityType]
+﻿CREATE TABLE [dbo].[EntityType]
 (
 	[IdEntityType] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
 	[Name] NVARCHAR(50) NOT NULL,

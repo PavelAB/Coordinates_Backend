@@ -4,7 +4,7 @@
 AS
 BEGIN
 	if(@IdSpot IS NULL)
-		SELECT TOP 1 @IdSpot = IdSpot FROM [SPOT];
+		SELECT TOP 1 @IdSpot = IdSpot FROM [Spot];
 	if(@IdComment IS NULL)
 		SELECT TOP 1 @IdComment = IdComment FROM [Comment];
 
