@@ -2,6 +2,7 @@
 using Coordiantes_Tools.Queries;
 using Coordinates_CQS_Domain.Commands.Users;
 using Coordinates_CQS_Domain.Entities.User;
+using Coordinates_CQS_Domain.Queries.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Coordinates_CQS_Domain.Repositories
 {
     public interface IAuthRepository:
         ICommandHandler<CreateUserCommand>,
-        IQueryHandler<CheckPasswordCommand, User>
+        IQueryHandler<CheckPasswordQuery, User>
     {
         
     }

@@ -3,6 +3,7 @@ using Coordiantes_Tools.Tools;
 using Coordinates_API.Tools;
 using Coordinates_CQS_Domain.Commands.Users;
 using Coordinates_CQS_Domain.Entities.User;
+using Coordinates_CQS_Domain.Queries.User;
 using Coordinates_CQS_Domain.Repositories;
 using Coordinates_CQS_Domain.Services;
 using DotNetEnv;
@@ -69,11 +70,11 @@ namespace Coordinates_ConsoleTest
             #region CheckPassword
 
 
-            CheckPasswordCommand checkPasswordCommandBad = new("Bad2", "0001");
+            CheckPasswordQuery checkPasswordCommandBad = new("Bad2", "0001");
             ICqsResult<User> resultBad = authRepository.Execute(checkPasswordCommandBad);
             Console.WriteLine(resultBad.ErrorMessage);
 
-            CheckPasswordCommand checkPasswordCommand = new("Bad2", "0000");
+            CheckPasswordQuery checkPasswordCommand = new("Bad2", "0000");
             ICqsResult<User> result = authRepository.Execute(checkPasswordCommand);
             User newUserAuth = result.Content;
             newUserAuth.Token = tokenRepository.GenerateToken(newUserAuth);
