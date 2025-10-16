@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Coordinates_CQS_Domain.Commands.Users;
 using Coordinates_CQS_Domain.Mappers;
 using Coordinates_CQS_Domain.Entities.User;
+using Coordinates_CQS_Domain.Queries.User;
 
 namespace Coordinates_CQS_Domain.Services
 {
@@ -54,7 +55,7 @@ namespace Coordinates_CQS_Domain.Services
             }
         }
 
-        public ICqsResult<User> Execute(CheckPasswordCommand command)
+        public ICqsResult<User> Execute(CheckPasswordQuery command)
         {
             using (SqlConnection connection = new(_connectonString))
             {
