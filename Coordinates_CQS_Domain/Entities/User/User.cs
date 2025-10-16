@@ -15,6 +15,7 @@ namespace Coordinates_CQS_Domain.Entities.User
         public string Login { get; set; }
         public string Email { get; set; }
         public string? Avatar { get; set; }
+        public string? Token { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
