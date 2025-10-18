@@ -93,9 +93,7 @@ namespace Coordinates_ConsoleTest
                 -154.59843m, 
                 1546.52m, 
                 "MyFavoriteSpot", 
-                new Guid("1E911C43-CC6E-4C64-8214-59C10F3D85FB"), 
-                new Guid("82319C4A-4F20-4E8A-828A-807DB23DDFE0"), 
-                new Guid("8BF44C91-B7D8-4157-A1FA-AB60767572D5"));
+                new Guid(newUserAuth.IdUser!.ToString()));
             ICqsResult resultSpot = spotRepository.Execute(createSpotCommand);
             Console.WriteLine($"Spot created : {resultSpot.IsSuccess}");
 

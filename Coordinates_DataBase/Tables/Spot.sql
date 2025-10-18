@@ -23,5 +23,6 @@
 	CONSTRAINT [CK_LatitudeBounds] CHECK ([Latitude] BETWEEN -90 AND 90),
 	CONSTRAINT [CK_LongitudeBounds] CHECK ([Longitude] BETWEEN -180 AND 180),
 	CONSTRAINT [CK_ElevationBounds] CHECK ([Elevation] BETWEEN -15000 AND 15000),
+	CONSTRAINT [UQ_Latitude_Longitude] UNIQUE ([Longitude], [Latitude])
 	
 )
