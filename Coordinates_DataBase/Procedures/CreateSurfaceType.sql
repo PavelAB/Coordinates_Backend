@@ -2,5 +2,5 @@
 	@SurfaceType NVARCHAR(50)
 AS
 BEGIN
-	INSERT INTO [MM_SurfaceType] ([SurfaceType]) VALUES (@SurfaceType);
+	INSERT INTO [Surface] ([SurfaceType]) VALUES (@SurfaceType);
 END

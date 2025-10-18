@@ -17,7 +17,7 @@ namespace Coordinates_CQS_Domain.Commands.Spot
         public Guid EntityType { get; set; }
         public Guid SurfaceType { get; set; }
         public Guid CreatedBy { get; set; }
-        public CreateSpotCommand(decimal latitude, decimal longitude, decimal elevation, string? name, Guid entityType, Guid surfaceType, Guid createdBy)
+        public CreateSpotCommand(decimal latitude, decimal longitude, decimal elevation, string? name, Guid createdBy, Guid entityType, Guid surfaceType)
         {
             Latitude = latitude;
             Longitude = longitude;

@@ -10,8 +10,6 @@
 	[CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(),
 	[UpdatedAt] DATETIME2 NULL,
 	[DeletedAt] DATETIME2 NULL,
-	[IdEntityType] UNIQUEIDENTIFIER NOT NULL,
-	[IdSurfaceType] UNIQUEIDENTIFIER NOT NULL,
 	[CreatedBy] UNIQUEIDENTIFIER NOT NULL,
 	[UpdatedBy] UNIQUEIDENTIFIER NULL,
 	[DeletedBy] UNIQUEIDENTIFIER NULL,
@@ -21,11 +19,10 @@
     CONSTRAINT [FK_Spot_User_CreatedBy] FOREIGN KEY ([CreatedBy]) REFERENCES [User]([IdUser]),
 	CONSTRAINT [FK_Spot_User_UpdatedBy] FOREIGN KEY ([UpdatedBy]) REFERENCES [User]([IdUser]),
 	CONSTRAINT [FK_Spot_User_DeletedBy] FOREIGN KEY ([DeletedBy]) REFERENCES [User]([IdUser]),
-	CONSTRAINT [FK_Spot_EntityType] FOREIGN KEY ([IdEntityType]) REFERENCES [MM_EntityType]([IdEntityType]),
-	CONSTRAINT [FK_Spot_SurfaceType] FOREIGN KEY ([IdSurfaceType]) REFERENCES [MM_SurfaceType]([IdSurface]),
 	-- Other Constraints
 	CONSTRAINT [CK_LatitudeBounds] CHECK ([Latitude] BETWEEN -90 AND 90),
 	CONSTRAINT [CK_LongitudeBounds] CHECK ([Longitude] BETWEEN -180 AND 180),
 	CONSTRAINT [CK_ElevationBounds] CHECK ([Elevation] BETWEEN -15000 AND 15000),
+	CONSTRAINT [UQ_Latitude_Longitude] UNIQUE ([Longitude], [Latitude])
 	
 )
