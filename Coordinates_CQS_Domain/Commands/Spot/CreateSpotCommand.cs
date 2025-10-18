@@ -14,15 +14,17 @@ namespace Coordinates_CQS_Domain.Commands.Spot
         public decimal Longitude { get; set; }
         public decimal Elevation { get; set; }
         public string? Name { get; set; }
-        //public Guid EntityType { get; set; }
-        //public Guid SurfaceType { get; set; }
+        public Guid EntityType { get; set; }
+        public Guid SurfaceType { get; set; }
         public Guid CreatedBy { get; set; }
-        public CreateSpotCommand(decimal latitude, decimal longitude, decimal elevation, string? name, Guid createdBy)
+        public CreateSpotCommand(decimal latitude, decimal longitude, decimal elevation, string? name, Guid createdBy, Guid entityType, Guid surfaceType)
         {
             Latitude = latitude;
             Longitude = longitude;
             Elevation = elevation;
             Name = name;
+            EntityType = entityType;
+            SurfaceType = surfaceType;
             CreatedBy = createdBy;
         }
     }

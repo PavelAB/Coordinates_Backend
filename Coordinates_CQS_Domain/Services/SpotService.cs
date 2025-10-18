@@ -28,6 +28,8 @@ namespace Coordinates_CQS_Domain.Services
                     sqlCommand.CommandText = "dbo.SP_Spot_Create";
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@IdUser", command.CreatedBy);
+                    sqlCommand.Parameters.AddWithValue("@EntityType", command.EntityType);
+                    sqlCommand.Parameters.AddWithValue("@Surface", command.SurfaceType);
                     sqlCommand.Parameters.AddWithValue("@Latitude", command.Latitude);
                     sqlCommand.Parameters.AddWithValue("@Longitude", command.Longitude);
                     sqlCommand.Parameters.AddWithValue("@Elevation", command.Elevation);
@@ -43,7 +45,6 @@ namespace Coordinates_CQS_Domain.Services
                     }
                     catch (Exception e)
                     {
-
                         return ICqsResult.Failure(e.Message);
                     }
 
