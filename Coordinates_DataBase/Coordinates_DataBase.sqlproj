@@ -108,7 +108,7 @@
     <None Include="Coordinates_DataBase.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Data\LoadDbTest.sql" />
+    <None Include="Data\LoadDbTest.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\TestProcedures.sql" />

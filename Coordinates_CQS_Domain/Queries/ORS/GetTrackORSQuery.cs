@@ -11,14 +11,14 @@ namespace Coordinates_CQS_Domain.Queries.ORS
     public class GetTrackORSQuery : IQueryDefinition<TrackCreate>
     {
 
-        public string Start { get; }
-        public string End { get; }
+        public IReadOnlyList<(decimal Longitude, decimal Latitude)> Coordinates { get;}
         public string Key { get; } // ??
-        public GetTrackORSQuery(string start, string end, string key)
+       
+        public GetTrackORSQuery(IReadOnlyList<(decimal, decimal)> coordinates, string key)
         {
-            Start = start;
-            End = end;
+            Coordinates = coordinates;
             Key = key;
         }
+        
     }
 }

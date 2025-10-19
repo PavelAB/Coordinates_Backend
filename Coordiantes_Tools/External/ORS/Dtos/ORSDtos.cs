@@ -19,6 +19,8 @@ namespace Coordiantes_Tools.External.ORS.Dtos
             [property: JsonPropertyName("geometry")] OrsGeometry Geometry
         );
     public sealed record OrsProperties(
+            [property: JsonPropertyName("ascent")] decimal Ascent,
+            [property: JsonPropertyName("descent")] decimal Descent,
             [property: JsonPropertyName("summary")] OrsSummary Summary,
             [property: JsonPropertyName("way_points")] List<int> WayPoints
         );

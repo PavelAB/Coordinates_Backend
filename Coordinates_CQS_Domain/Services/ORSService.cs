@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Coordinates_CQS_Domain.Services
 {
@@ -17,21 +19,49 @@ namespace Coordinates_CQS_Domain.Services
 
         public async ValueTask<ICqsResult<TrackCreate>> ExecuteAsync(GetTrackORSQuery query)
         {
-            string url = $"https://api.openrouteservice.org/v2/directions/cycling-road?start={query.Start}&end={query.End}";
-
-            using (HttpClient httpClient = new())
+            Uri baseAddress = new Uri("https://api.openrouteservice.org");
+            try
             {
-                httpClient.DefaultRequestHeaders.Clear();
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", query.Key); // Validation
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json, application/geo+json, application/gpx+xml, image/png; charset=utf-8");
 
-                using (HttpResponseMessage response = await httpClient.GetAsync(url))
+                object body = new
                 {
-                    response.EnsureSuccessStatusCode();
-                    string responseData = await response.Content.ReadAsStringAsync();
-                    return ICqsResult<TrackCreate>.Success(Mapper.MapToTrackCreate(responseData));
+                    coordinates = query.Coordinates
+                    .Select(c => new[] { c.Longitude, c.Latitude })
+                    .ToArray(),
+                    elevation = true,
+                    extra_info = new[] { "surface", "waytype" }
+                };
+
+                string json = JsonSerializer.Serialize(body);
+
+                using (HttpClient httpClient = new() { BaseAddress = baseAddress })
+                {
+                    httpClient.DefaultRequestHeaders.Clear();
+                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8");
+                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
+                    httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", query.Key);
+
+                    using (StringContent content = new StringContent(json, Encoding.UTF8, "application/json"))
+
+                    using (HttpResponseMessage response = await httpClient.PostAsync("/v2/directions/cycling-road/geojson", content))
+                    {
+
+                        response.EnsureSuccessStatusCode();
+                        string responseData = await response.Content.ReadAsStringAsync();
+                        return ICqsResult<TrackCreate>.Success(Mapper.MapToTrackCreate(responseData));
+
+                    }
+
+
                 }
+
             }
+            catch (Exception e)
+            {
+                return ICqsResult<TrackCreate>.Failure(e.Message);
+            }
+
         }
+
     }
 }
