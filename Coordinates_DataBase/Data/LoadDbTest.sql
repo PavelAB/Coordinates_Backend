@@ -50,7 +50,7 @@ EXEC dbo.CreateSpot
 
 -- Create Track
 
-EXEC dbo.CreateTrack @Distance = 1000.89, @Elevation = 100.05
+EXEC dbo.CreateTrack @Distance = 1000.89, @Ascent = 100.05, @Descent = 900.05
 
 -- Create PolyLine
 
