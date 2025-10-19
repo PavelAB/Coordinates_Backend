@@ -12,7 +12,6 @@ namespace Coordiantes_Tools.Tools
         public string Issuer { get; }
         public string Audience { get; }
         public string SecurityKey { get; }
-
         public JwtOptions(string issuer, string audience, string securityKey)
         {
             Issuer = issuer;

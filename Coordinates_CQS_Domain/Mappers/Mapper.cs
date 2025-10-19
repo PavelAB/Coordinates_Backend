@@ -1,4 +1,6 @@
-﻿using Coordinates_CQS_Domain.Entities.User;
+﻿using Coordiantes_Tools.External.ORS.Dtos;
+using Coordinates_CQS_Domain.Entities.Track;
+using Coordinates_CQS_Domain.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Coordinates_CQS_Domain.Mappers
@@ -32,5 +35,20 @@ namespace Coordinates_CQS_Domain.Mappers
             };                
             
        }
+
+        public static TrackCreate MapToTrackCreate(string orsJson)
+        {
+            OrsFeatureCollection dto = JsonSerializer.Deserialize<OrsFeatureCollection>(
+                orsJson,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true}
+            ) ?? throw new InvalidOperationException("ORS response is null");
+
+            return new TrackCreate()
+            {
+                Distance = dto.Features[0].Properties.Summary.Distance,
+                Elevation = 0.0m, // TODO bad endpoint
+                PolyLine = JsonSerializer.Serialize(dto.Features[0].Geometry.Coordinates)
+            };
+        }
     }
 }
