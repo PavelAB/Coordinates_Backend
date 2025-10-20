@@ -104,6 +104,7 @@
     <Build Include="Tables\MM_Track_Surface.sql" />
     <Build Include="Tables\MM_Track_EntityType.sql" />
     <Build Include="Procedures\SP_Spot_Get.sql" />
+    <Build Include="Procedures\SP_Track_Create.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
