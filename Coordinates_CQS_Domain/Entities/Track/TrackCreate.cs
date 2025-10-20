@@ -9,7 +9,8 @@ namespace Coordinates_CQS_Domain.Entities.Track
     public class TrackCreate
     {
         public decimal Distance {  get; set; }
-        public decimal Elevation { get; set; }
+        public decimal Ascent { get; set; }
+        public decimal Descent { get; set; }
         public string PolyLine { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace Coordinates_ConsoleTest
             EnvConfig envConfig = new();
 
 
-            
+
             JwtOptions jwtOptions = new(
                 envConfig.Get("TOKEN_ISSUER")!,
                 envConfig.Get("TOKEN_AUDIENCE")!,
@@ -114,12 +114,27 @@ namespace Coordinates_ConsoleTest
             #region ORS Test
             //end lat=50.606282&lon=4.225678
             //start lat=50.493968&lon=4.287420
-
-            GetTrackORSQuery newTrack = new("4.287420,50.493968", "4.225678,50.606282", envConfig.Get("SECURITY_ORS_KEY")!);
-            ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
-            Console.WriteLine($"Distance: {test.Content.Distance} ");
-            Console.WriteLine($"PolyLine: {test.Content.PolyLine} ");
-
+            
+            GetTrackORSQuery newTrack = new(
+                new (decimal Longitude, decimal Latitude)[]
+                {
+                    (4.287420m, 50.493968m),
+                    (4.225678m, 50.606282m)
+                }, 
+                envConfig.Get("SECURITY_ORS_KEY")!
+            );
+            try
+            {
+                ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
+                Console.WriteLine($"Distance: {test.Content.Distance} ");
+                Console.WriteLine($"PolyLine: {test.Content.PolyLine.Length} ");
+                Console.WriteLine($"Ascent: {test.Content.Ascent} ");
+                Console.WriteLine($"Descent: {test.Content.Descent} ");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
             #endregion
         }
     }

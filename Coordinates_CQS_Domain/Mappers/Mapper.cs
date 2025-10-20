@@ -46,7 +46,8 @@ namespace Coordinates_CQS_Domain.Mappers
             return new TrackCreate()
             {
                 Distance = dto.Features[0].Properties.Summary.Distance,
-                Elevation = 0.0m, // TODO bad endpoint
+                Ascent = dto.Features[0].Properties.Ascent,
+                Descent = dto.Features[0].Properties.Descent,
                 PolyLine = JsonSerializer.Serialize(dto.Features[0].Geometry.Coordinates)
             };
         }
