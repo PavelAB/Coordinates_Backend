@@ -2,6 +2,7 @@
 using Coordiantes_Tools.Tools;
 using Coordinates_API.Tools;
 using Coordinates_CQS_Domain.Commands.Spot;
+using Coordinates_CQS_Domain.Commands.Track;
 using Coordinates_CQS_Domain.Commands.Users;
 using Coordinates_CQS_Domain.Entities.Spot;
 using Coordinates_CQS_Domain.Entities.Track;
@@ -61,6 +62,7 @@ namespace Coordinates_ConsoleTest
             serviceCollection.AddScoped<ITokenRepository, TokenService>();
             serviceCollection.AddScoped<ISpotRepository, SpotService>();
             serviceCollection.AddScoped<IORSRepository, ORSService>();
+            serviceCollection.AddScoped<ITrackRepository, TrackService>();
 
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
@@ -68,6 +70,7 @@ namespace Coordinates_ConsoleTest
             ITokenRepository tokenRepository = serviceProvider.GetService<ITokenRepository>();
             ISpotRepository spotRepository = serviceProvider.GetService<ISpotRepository>();
             IORSRepository orsRepository = serviceProvider.GetRequiredService<IORSRepository>();
+            ITrackRepository trackRepository = serviceProvider.GetRequiredService<ITrackRepository>();
 
             #region Create User
 
@@ -156,9 +159,9 @@ namespace Coordinates_ConsoleTest
                     Console.WriteLine($"ResultEnd: Name = {newSpotStart.Name}");
                 }
 
+                //lat = 50.476236 & lon = 4.473592
 
-
-                GetSpotQuery getSpotQueryEnd = new(longitude: 4.287420m, latitude: 50.493968m);
+                GetSpotQuery getSpotQueryEnd = new(longitude: 4.473592m, latitude: 50.476236m);
                 ICqsResult<Spot_Get> resultEnd = await spotRepository.ExecuteAsync(getSpotQueryEnd);
                 Spot_Get newSpotEnd = null;
                 if (resultEnd.IsSuccess)
@@ -173,10 +176,10 @@ namespace Coordinates_ConsoleTest
                     Console.WriteLine($"ResultEnd: IdSpot = {resultEnd.ErrorMessage}");
 
                     CreateSpotCommand createSpotCommandEnd = new(
-                        50.493968m,
-                        4.287420m,
+                        50.476236m,
+                        4.473592m,
                         136m,
-                        "MyFavoriteSpot-Godarville",
+                        "MyFavoriteSpot-Gosselies",
                         new Guid("2A065D32-88EB-4CEA-9713-866ACC632733")
                     );
 
@@ -213,6 +216,26 @@ namespace Coordinates_ConsoleTest
                 Console.WriteLine($"PolyLine: {test.Content.PolyLine.Length} ");
                 Console.WriteLine($"Ascent: {test.Content.Ascent} ");
                 Console.WriteLine($"Descent: {test.Content.Descent} ");
+
+
+                CreateTrackCommand createTrackCommand = new(
+                    test.Content.Distance,
+                    test.Content.Ascent,
+                    test.Content.Descent,
+                    test.Content.PolyLine,
+                    new Guid("2A065D32-88EB-4CEA-9713-866ACC632733"),
+                    [newSpotStart.IdSpot, newSpotEnd.IdSpot],
+                    test.Content.WayPoints
+                    );
+                ICqsResult resultTrack = trackRepository.Execute(createTrackCommand);
+                Console.WriteLine($"Track created : {resultTrack.IsSuccess}");
+                if (resultTrack.IsFailure)
+                {
+                    Console.WriteLine($"Track created : {resultTrack.IsFailure}");
+                    Console.WriteLine(resultTrack.ErrorMessage);
+                }
+
+
 
             }
             catch (Exception e)

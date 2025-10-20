@@ -68,7 +68,8 @@ namespace Coordinates_CQS_Domain.Mappers
                 Distance = dto.Features[0].Properties.Summary.Distance,
                 Ascent = dto.Features[0].Properties.Ascent,
                 Descent = dto.Features[0].Properties.Descent,
-                PolyLine = JsonSerializer.Serialize(dto.Features[0].Geometry.Coordinates)
+                PolyLine = JsonSerializer.Serialize(dto.Features[0].Geometry.Coordinates),
+                WayPoints = dto.Features[0].Properties.WayPoints
             };
         }
     }

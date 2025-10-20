@@ -2,7 +2,7 @@
 	@Distance DECIMAL(8,2),
 	@Ascent DECIMAL(8,2),
 	@Descent DECIMAL(8,2),
-	@Name NVARCHAR(50),
+	@Name NVARCHAR(50) = DEFAULT,
 	@IsPrivate BIT = 0,
 	@PolyLine NVARCHAR(MAX),
 	@CreatedBy UNIQUEIDENTIFIER,
