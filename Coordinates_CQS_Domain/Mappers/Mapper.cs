@@ -1,4 +1,5 @@
 ﻿using Coordiantes_Tools.External.ORS.Dtos;
+using Coordinates_CQS_Domain.Entities.Spot;
 using Coordinates_CQS_Domain.Entities.Track;
 using Coordinates_CQS_Domain.Entities.User;
 using System;
@@ -15,7 +16,7 @@ namespace Coordinates_CQS_Domain.Mappers
 {
     internal static class Mapper
     {
-       public static User ToUser(this IDataReader record)
+        public static User ToUser(this IDataReader record)
        {
             if (record == null)
                 throw new ArgumentNullException(nameof(record));
@@ -35,6 +36,25 @@ namespace Coordinates_CQS_Domain.Mappers
             };                
             
        }
+
+        public static Spot_Get ToSpot_Get(this IDataReader record)
+        {
+            if (record == null)
+                throw new ArgumentNullException(nameof(record));
+
+
+            return new Spot_Get()
+            {
+                IdSpot = (Guid)record["IdSpot"],
+                Latitude = (decimal)record["Latitude"],
+                Longitude = (decimal)record["Longitude"],
+                Elevation = (decimal)record["Elevation"],
+                Name = (string)record["Name"],
+                IsPrivate = (bool)record["IsPrivate"],
+                CreatedAt = (DateTime)record["CreatedAt"],
+                CreatedBy = (Guid)record["CreatedBy"]
+            };
+        }
 
         public static TrackCreate MapToTrackCreate(string orsJson)
         {

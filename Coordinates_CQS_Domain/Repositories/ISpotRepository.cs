@@ -1,5 +1,8 @@
 ﻿using Coordiantes_Tools.Commands;
+using Coordiantes_Tools.Queries;
 using Coordinates_CQS_Domain.Commands.Spot;
+using Coordinates_CQS_Domain.Entities.Spot;
+using Coordinates_CQS_Domain.Queries.Spot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +12,8 @@ using System.Threading.Tasks;
 namespace Coordinates_CQS_Domain.Repositories
 {
     public interface ISpotRepository: 
-        ICommandHandler<CreateSpotCommand>
+        ICommandHandler<CreateSpotCommand>,
+        IAsyncQueryHandler<GetSpotQuery, Spot_Get>
     {
 
     }

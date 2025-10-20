@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Coordinates_CQS_Domain.Entities.Spot;
+using Coordinates_CQS_Domain.Queries.Spot;
+using Coordinates_CQS_Domain.Mappers;
 
 namespace Coordinates_CQS_Domain.Services
 {
@@ -50,6 +53,42 @@ namespace Coordinates_CQS_Domain.Services
 
                 }
             }
+        }
+
+        
+        public async ValueTask<ICqsResult<Spot_Get>> ExecuteAsync(GetSpotQuery query)
+        {
+            using(SqlConnection connection = new(_connectonString))
+            {
+                using(SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "dbo.SP_Spot_Get";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@IdSpot", query.IdSpot);
+                    command.Parameters.AddWithValue("@Latitude", query.Latitude);
+                    command.Parameters.AddWithValue("@Longitude", query.Longitude);
+                    command.Parameters.AddWithValue("@Name", query.Name);
+                    command.Parameters.AddWithValue("@CreatedBy", query.CreatedBy);
+                    command.Parameters.AddWithValue("@IsPrivate", query.IsPriivate);
+
+                    Spot_Get spot = null;
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (reader.Read())
+                        {
+                            spot = reader.ToSpot_Get();
+                        }
+                    }
+
+                    if (spot is not null)
+                        return ICqsResult<Spot_Get>.Success(spot);
+                    else
+                        return ICqsResult<Spot_Get>.Failure("No content");
+                }
+            }    
         }
     }
 }
