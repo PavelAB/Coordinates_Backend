@@ -1,6 +1,7 @@
 
 using Coordiantes_Tools.Tools;
 using Coordinates_API.Tools;
+using Coordinates_CQS_Domain.Repositories;
 using Coordinates_CQS_Domain.Services;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -50,7 +51,8 @@ namespace Coordinates_API
                 });
 
 
-            builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<ITokenRepository, TokenService>();
+            builder.Services.AddScoped<IAuthRepository,AuthService>();
 
             var app = builder.Build();
 

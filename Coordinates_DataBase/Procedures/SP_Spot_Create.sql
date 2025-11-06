@@ -4,8 +4,8 @@
 	@Elevation DECIMAL(8,2),
 	@Name NVARCHAR(50) = DEFAULT,
 	@IdUser UNIQUEIDENTIFIER = NULL,
-    @Surface UNIQUEIDENTIFIER,
-    @EntityType UNIQUEIDENTIFIER
+    @Surface UNIQUEIDENTIFIER = NULL,
+    @EntityType UNIQUEIDENTIFIER = NULL
 AS
 BEGIN
     
@@ -13,6 +13,10 @@ BEGIN
 
     BEGIN TRY
         BEGIN TRANSACTION
+            IF @Surface IS NULL
+                SELECT @Surface = IdSurface FROM Surface WHERE SurfaceType = 'No Information'
+            IF @EntityType IS NULL
+                SELECT @EntityType = IdEntityType FROM EntityType WHERE [Name] = 'No Information'
 
 	        IF @IdUser IS NULL
 		        RAISERROR('The UserId for CreatedBy cannot be null.', 16, 1);

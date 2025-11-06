@@ -2,10 +2,13 @@
 using Coordiantes_Tools.Tools;
 using Coordinates_API.Tools;
 using Coordinates_CQS_Domain.Commands.Spot;
+using Coordinates_CQS_Domain.Commands.Track;
 using Coordinates_CQS_Domain.Commands.Users;
+using Coordinates_CQS_Domain.Entities.Spot;
 using Coordinates_CQS_Domain.Entities.Track;
 using Coordinates_CQS_Domain.Entities.User;
 using Coordinates_CQS_Domain.Queries.ORS;
+using Coordinates_CQS_Domain.Queries.Spot;
 using Coordinates_CQS_Domain.Queries.User;
 using Coordinates_CQS_Domain.Repositories;
 using Coordinates_CQS_Domain.Services;
@@ -59,6 +62,7 @@ namespace Coordinates_ConsoleTest
             serviceCollection.AddScoped<ITokenRepository, TokenService>();
             serviceCollection.AddScoped<ISpotRepository, SpotService>();
             serviceCollection.AddScoped<IORSRepository, ORSService>();
+            serviceCollection.AddScoped<ITrackRepository, TrackService>();
 
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
@@ -66,12 +70,16 @@ namespace Coordinates_ConsoleTest
             ITokenRepository tokenRepository = serviceProvider.GetService<ITokenRepository>();
             ISpotRepository spotRepository = serviceProvider.GetService<ISpotRepository>();
             IORSRepository orsRepository = serviceProvider.GetRequiredService<IORSRepository>();
+            ITrackRepository trackRepository = serviceProvider.GetRequiredService<ITrackRepository>();
 
+
+            //trackRepository. --- private service => need to ask
             #region Create User
 
-            //CreateUserCommand newUser = new("WorsePerson", "Bad2", "bad@world2.net", "0000");
+            //CreateUserCommand newUser = new("WorsePerson", "Bad2.1", "bad.1@world2.net", "0000");
             //ICqsResult resultUser = authRepository.Execute(newUser);
             //Console.WriteLine($"User created : {resultUser.IsSuccess}");
+            //string token = tokenRepository.GenerateToken()
 
             #endregion
 
@@ -114,27 +122,157 @@ namespace Coordinates_ConsoleTest
             #region ORS Test
             //end lat=50.606282&lon=4.225678
             //start lat=50.493968&lon=4.287420
-            
-            GetTrackORSQuery newTrack = new(
-                new (decimal Longitude, decimal Latitude)[]
-                {
-                    (4.287420m, 50.493968m),
-                    (4.225678m, 50.606282m)
-                }, 
-                envConfig.Get("SECURITY_ORS_KEY")!
-            );
-            try
-            {
-                ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
-                Console.WriteLine($"Distance: {test.Content.Distance} ");
-                Console.WriteLine($"PolyLine: {test.Content.PolyLine.Length} ");
-                Console.WriteLine($"Ascent: {test.Content.Ascent} ");
-                Console.WriteLine($"Descent: {test.Content.Descent} ");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            // ----------------------------------------------------------------------------------------------------------------------------------
+            //try
+            //{
+            //    GetSpotQuery getSpotQueryStart = new(longitude: 4.225678m, latitude: 50.606282m);
+            //    ICqsResult<Spot_Get> resultStart = await spotRepository.ExecuteAsync(getSpotQueryStart);
+            //    Spot_Get newSpotStart = null;
+            //    if (resultStart.IsSuccess)
+            //    {
+            //        newSpotStart = resultStart.Content;
+            //        Console.WriteLine($"Result: IdSpot = {newSpotStart.IdSpot}");
+            //        Console.WriteLine($"ResultEnd: Name = {newSpotStart.Name}");
+
+            //    }
+            //    else if (resultStart.IsFailure)
+            //    {
+            //        Console.WriteLine($"Result: IdSpot = {resultStart.ErrorMessage}");
+
+            //        CreateSpotCommand createSpotCommand = new(
+            //            50.606282m,
+            //            4.225678m,
+            //            140m,
+            //            "MyFavoriteSpot-Ronq",
+            //            new Guid("2A065D32-88EB-4CEA-9713-866ACC632733")
+            //        );
+
+            //        ICqsResult resultSpot = spotRepository.Execute(createSpotCommand);
+            //        Console.WriteLine($"Spot created : {resultSpot.IsSuccess}");
+            //        if (resultSpot.IsFailure)
+            //        {
+            //            Console.WriteLine($"Spot created : {resultSpot.IsFailure}");
+            //            Console.WriteLine(resultSpot.ErrorMessage);
+            //        }
+
+
+            //        ICqsResult<Spot_Get> resultAfterInsert = await spotRepository.ExecuteAsync(getSpotQueryStart);
+            //        newSpotStart = resultAfterInsert.Content;
+            //        Console.WriteLine($"Result: IdSpot = {newSpotStart.IdSpot}");
+            //        Console.WriteLine($"ResultEnd: Name = {newSpotStart.Name}");
+            //    }
+
+            //    //lat = 50.476236 & lon = 4.473592
+
+            //    GetSpotQuery getSpotQueryEnd = new(longitude: 4.473592m, latitude: 50.476236m);
+            //    ICqsResult<Spot_Get> resultEnd = await spotRepository.ExecuteAsync(getSpotQueryEnd);
+            //    Spot_Get newSpotEnd = null;
+            //    if (resultEnd.IsSuccess)
+            //    {
+            //        newSpotEnd = resultEnd.Content;
+            //        Console.WriteLine($"ResultEnd: IdSpot = {newSpotEnd.IdSpot}");
+            //        Console.WriteLine($"ResultEnd: Name = {newSpotEnd.Name}");
+
+            //    }
+            //    else if (resultEnd.IsFailure)
+            //    {
+            //        Console.WriteLine($"ResultEnd: IdSpot = {resultEnd.ErrorMessage}");
+
+            //        CreateSpotCommand createSpotCommandEnd = new(
+            //            50.476236m,
+            //            4.473592m,
+            //            136m,
+            //            "MyFavoriteSpot-Gosselies",
+            //            new Guid("2A065D32-88EB-4CEA-9713-866ACC632733")
+            //        );
+
+            //        ICqsResult resultSpotEnd2 = spotRepository.Execute(createSpotCommandEnd);
+            //        Console.WriteLine($"Spot created : {resultSpotEnd2.IsSuccess}");
+            //        if (resultSpotEnd2.IsFailure)
+            //        {
+            //            Console.WriteLine($"Spot created : {resultSpotEnd2.IsFailure}");
+            //            Console.WriteLine(resultSpotEnd2.ErrorMessage);
+            //        }
+
+
+            //        ICqsResult<Spot_Get> resultAfterInsertEnd = await spotRepository.ExecuteAsync(getSpotQueryEnd);
+            //        newSpotEnd = resultAfterInsertEnd.Content;
+            //        Console.WriteLine($"ResultEnd: IdSpot = {newSpotEnd.IdSpot}");
+            //        Console.WriteLine($"ResultEnd: Name = {newSpotEnd.Name}");
+            //    }
+
+            //    Console.WriteLine("Before ORS");
+
+
+            //    GetTrackORSQuery newTrack = new(
+            //        new (decimal Longitude, decimal Latitude)[]
+            //        {
+            //            (newSpotStart.Longitude, newSpotStart.Latitude),
+            //            (newSpotEnd.Longitude, newSpotEnd.Latitude)
+            //        },
+            //        envConfig.Get("SECURITY_ORS_KEY")!
+            //    ) ;
+
+            //    ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
+            //    Console.WriteLine("After ORS");
+            //    Console.WriteLine($"Distance: {test.Content.Distance} ");
+            //    Console.WriteLine($"PolyLine: {test.Content.PolyLine.Length} ");
+            //    Console.WriteLine($"Ascent: {test.Content.Ascent} ");
+            //    Console.WriteLine($"Descent: {test.Content.Descent} ");
+
+
+            //    CreateTrackCommand createTrackCommand = new(
+            //        test.Content.Distance,
+            //        test.Content.Ascent,
+            //        test.Content.Descent,
+            //        test.Content.PolyLine,
+            //        new Guid("2A065D32-88EB-4CEA-9713-866ACC632733"),
+            //        [newSpotStart.IdSpot, newSpotEnd.IdSpot],
+            //        test.Content.WayPoints
+            //        );
+            //    ICqsResult resultTrack = trackRepository.Execute(createTrackCommand);
+            //    Console.WriteLine($"Track created : {resultTrack.IsSuccess}");
+            //    if (resultTrack.IsFailure)
+            //    {
+            //        Console.WriteLine($"Track created : {resultTrack.IsFailure}");
+            //        Console.WriteLine(resultTrack.ErrorMessage);
+            //    }
+
+
+
+            //}
+            //catch (Exception e)
+            //{
+
+            //    Console.WriteLine($"Error: {e.Message}");
+            //}
+
+            // ----------------------------------------------------------------------------------------------------------
+            //try
+            //{
+
+
+
+            //    GetTrackORSQuery newTrack = new(
+            //        new (decimal Longitude, decimal Latitude)[]
+            //        {
+            //            (4.287420m, 50.493968m),
+            //            (4.225678m, 50.606282m)
+            //        },
+            //        envConfig.Get("SECURITY_ORS_KEY")!
+            //    );
+
+
+            //    ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
+            //    Console.WriteLine($"Distance: {test.Content.Distance} ");
+            //    Console.WriteLine($"PolyLine: {test.Content.PolyLine.Length} ");
+            //    Console.WriteLine($"Ascent: {test.Content.Ascent} ");
+            //    Console.WriteLine($"Descent: {test.Content.Descent} ");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
             #endregion
         }
     }

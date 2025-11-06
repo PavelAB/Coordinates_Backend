@@ -12,5 +12,6 @@ namespace Coordinates_CQS_Domain.Entities.Track
         public decimal Ascent { get; set; }
         public decimal Descent { get; set; }
         public string PolyLine { get; set; }
+        public List<int> WayPoints { get; set; }
     }
 }
