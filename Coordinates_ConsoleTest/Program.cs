@@ -67,7 +67,7 @@ namespace Coordinates_ConsoleTest
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
             IAuthRepository authRepository = serviceProvider.GetService<IAuthRepository>();
-            ITokenRepository tokenRepository = serviceProvider.GetService<ITokenRepository>();
+            ITokenRepository tokenRepository = serviceProvider.GetRequiredService<ITokenRepository>();
             ISpotRepository spotRepository = serviceProvider.GetService<ISpotRepository>();
             IORSRepository orsRepository = serviceProvider.GetRequiredService<IORSRepository>();
             ITrackRepository trackRepository = serviceProvider.GetRequiredService<ITrackRepository>();
@@ -79,8 +79,17 @@ namespace Coordinates_ConsoleTest
             //CreateUserCommand newUser = new("WorsePerson", "Bad2.1", "bad.1@world2.net", "0000");
             //ICqsResult resultUser = authRepository.Execute(newUser);
             //Console.WriteLine($"User created : {resultUser.IsSuccess}");
-            //string token = tokenRepository.GenerateToken()
+            CheckPasswordQuery connectedUser = new("Bad2.1", "0000");
+            Console.WriteLine($"User connected : {connectedUser}");
+            ICqsResult<User> authUser = authRepository.Execute(connectedUser);
+            Console.WriteLine($"Auth user: {authUser.Content.Login}");
 
+
+            string? token = null;
+            if (authUser.Content is not null && tokenRepository is not null)
+                token = tokenRepository.GenerateToken(authUser.Content);
+            if(token is not null)
+                Console.WriteLine("Token: " + token);
             #endregion
 
             #region CheckPassword
