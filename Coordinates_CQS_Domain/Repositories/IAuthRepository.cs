@@ -13,7 +13,8 @@ namespace Coordinates_CQS_Domain.Repositories
 {
     public interface IAuthRepository:
         ICommandHandler<CreateUserCommand>,
-        IQueryHandler<CheckPasswordQuery, User>
+        IQueryHandler<CheckPasswordQuery, User>,
+        IQueryHandler<GetUserByIdQuery, User>
     {
         
     }

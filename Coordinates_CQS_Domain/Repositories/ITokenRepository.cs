@@ -11,6 +11,6 @@ namespace Coordinates_CQS_Domain.Repositories
     public interface ITokenRepository
     {
         string GenerateToken(User user);
-        User ReadFromToken(HttpRequest httpRequest);
+        Guid ReadFromToken(HttpRequest httpRequest);
     }
 }

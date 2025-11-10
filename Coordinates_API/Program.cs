@@ -16,9 +16,14 @@ namespace Coordinates_API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -50,6 +55,17 @@ namespace Coordinates_API
                     };
                 });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                            
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:4200").AllowAnyHeader();
+                                      //policy.WithOrigins("http://localhost:4200");
+                                  });
+            });
+
 
             builder.Services.AddScoped<ITokenRepository, TokenService>();
             builder.Services.AddScoped<IAuthRepository,AuthService>();
@@ -64,6 +80,8 @@ namespace Coordinates_API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
