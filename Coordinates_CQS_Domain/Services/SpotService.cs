@@ -24,6 +24,8 @@ namespace Coordinates_CQS_Domain.Services
 
         public ICqsResult Execute(CreateSpotCommand command)
         {
+            
+
             using (SqlConnection connection = new(_connectonString))
             {
                 using (SqlCommand sqlCommand = connection.CreateCommand())

@@ -78,7 +78,6 @@ namespace Coordinates_CQS_Domain.Services
                                 user = reader.ToUser();
                             }
                         }
-                        //Console.WriteLine("USER:"+ user.IdUser);
                         if (user is not null)
                         {
                             return ICqsResult<User>.Success(user);
@@ -98,6 +97,45 @@ namespace Coordinates_CQS_Domain.Services
             }
         }
 
+        public ICqsResult<User> Execute(GetUserByIdQuery query)
+        {
+            using (SqlConnection connection = new(_connectonString))
+            {
+                using (SqlCommand sqlCommand = connection.CreateCommand())
+                {
+                    sqlCommand.CommandText = "dbo.SP_User_GetById";
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@searchId", query.searchId);
 
+                    User user = null;
+                    try
+                    {
+                        connection.Open();
+
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                user = reader.ToUser();
+                            }
+                        }
+                        if (user is not null)
+                        {
+                            return ICqsResult<User>.Success(user);
+                        }
+                        else
+                            return ICqsResult<User>.Failure("No content");
+
+                    }
+                    catch (Exception e)
+                    {
+
+                        return ICqsResult<User>.Failure(e.Message);
+                    }
+
+
+                }
+            }
+        }
     }
 }

@@ -36,7 +36,8 @@ namespace Coordiantes_Tools.Results
             get 
             {
                 if (IsFailure)
-                    throw new InvalidOperationException();
+                    return default(TResult?);
+                    //throw new InvalidOperationException();
 
                 return _content;
             } 

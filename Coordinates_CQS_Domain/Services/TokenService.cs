@@ -1,7 +1,9 @@
-﻿using Coordiantes_Tools.Tools;
+﻿using Azure.Core;
+using Coordiantes_Tools.Tools;
 using Coordinates_CQS_Domain.Entities.User;
 using Coordinates_CQS_Domain.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -47,9 +49,31 @@ namespace Coordinates_CQS_Domain.Services
             return string.Concat(_PREFIX, token);
         }
 
-        public User ReadFromToken(HttpRequest httpRequest)
+        public Guid ReadFromToken(HttpRequest httpRequest)
         {
-            throw new NotImplementedException();
+            StringValues authorizations = httpRequest.Headers.SingleOrDefault(h => h.Key == "Authorization").Value;
+            string? token = authorizations.SingleOrDefault(a => a.StartsWith(_PREFIX));
+
+            if (token is null)
+                throw new InvalidOperationException("token is null");
+
+            token = token.Replace(_PREFIX, "");
+
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwtSecurityToken = (JwtSecurityToken)handler.ReadToken(token);
+
+            JwtPayload payload = jwtSecurityToken.Payload;
+
+
+            string? claimGuid = payload[ClaimTypes.PrimarySid].ToString();
+
+            if(claimGuid is null)
+                throw new InvalidOperationException("Claim error");
+
+            Guid userId = new Guid(claimGuid);
+
+            return userId;
+
         }
     }
 }
