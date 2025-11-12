@@ -9,10 +9,12 @@
 AS
 BEGIN
     
+    BEGIN TRANSACTION
+
     DECLARE @IdSpot UNIQUEIDENTIFIER
 
     BEGIN TRY
-        BEGIN TRANSACTION
+
             IF @Surface IS NULL
                 SELECT @Surface = IdSurface FROM Surface WHERE SurfaceType = 'No Information'
             IF @EntityType IS NULL
@@ -40,6 +42,7 @@ BEGIN
                         VALUES (@Latitude, @Longitude, @Elevation, @Name, @IdUser);
                     END            
                 END
+            ELSE
 
             -- ====
 

@@ -79,17 +79,17 @@ namespace Coordinates_ConsoleTest
             //CreateUserCommand newUser = new("WorsePerson", "Bad2.1", "bad.1@world2.net", "0000");
             //ICqsResult resultUser = authRepository.Execute(newUser);
             //Console.WriteLine($"User created : {resultUser.IsSuccess}");
-            CheckPasswordQuery connectedUser = new("Bad2.1", "0000");
-            Console.WriteLine($"User connected : {connectedUser}");
-            ICqsResult<User> authUser = authRepository.Execute(connectedUser);
-            Console.WriteLine($"Auth user: {authUser.Content.Login}");
+            //CheckPasswordQuery connectedUser = new("Bad2.1", "0000");
+            //Console.WriteLine($"User connected : {connectedUser}");
+            //ICqsResult<User> authUser = authRepository.Execute(connectedUser);
+            //Console.WriteLine($"Auth user: {authUser.Content.Login}");
 
 
-            string? token = null;
-            if (authUser.Content is not null && tokenRepository is not null)
-                token = tokenRepository.GenerateToken(authUser.Content);
-            if(token is not null)
-                Console.WriteLine("Token: " + token);
+            //string? token = null;
+            //if (authUser.Content is not null && tokenRepository is not null)
+            //    token = tokenRepository.GenerateToken(authUser.Content);
+            //if(token is not null)
+            //    Console.WriteLine("Token: " + token);
             #endregion
 
             #region CheckPassword
@@ -99,32 +99,32 @@ namespace Coordinates_ConsoleTest
             //ICqsResult<User> resultBad = authRepository.Execute(checkPasswordCommandBad);
             //Console.WriteLine(resultBad.ErrorMessage);
 
-            //CheckPasswordQuery checkPasswordCommand = new("Bad2", "0000");
-            //ICqsResult<User> result = authRepository.Execute(checkPasswordCommand);
-            //User newUserAuth = result.Content;
-            //newUserAuth.Token = tokenRepository.GenerateToken(newUserAuth);
-            //Console.WriteLine("IdUser: " + result.Content.IdUser);
-            //Console.WriteLine("Token: " + result.Content.Token);
+            CheckPasswordQuery checkPasswordCommand = new("Bad2", "0000");
+            ICqsResult<User> result = authRepository.Execute(checkPasswordCommand);
+            User newUserAuth = result.Content;
+            newUserAuth.Token = tokenRepository.GenerateToken(newUserAuth);
+            Console.WriteLine("IdUser: " + result.Content.IdUser);
+            Console.WriteLine("Token: " + result.Content.Token);
             #endregion
 
             #region Create Spot
 
-            //CreateSpotCommand createSpotCommand = new(
-            //    -45m, 
-            //    -154.59843m, 
-            //    1546.52m, 
-            //    "MyFavoriteSpot",
-            //    new Guid(newUserAuth.IdUser!.ToString()),
-            //    new Guid("37FF90EB-0E05-4FF7-9D11-FBBCCEFE59AD"),
-            //    new Guid("9953864A-1857-4545-804B-FFA7AB76E0B7")
-            //);
-            //ICqsResult resultSpot = spotRepository.Execute(createSpotCommand);
-            //Console.WriteLine($"Spot created : {resultSpot.IsSuccess}");
-            //if (resultSpot.IsFailure)
-            //{
-            //    Console.WriteLine($"Spot created : {resultSpot.IsFailure}");
-            //    Console.WriteLine(resultSpot.ErrorMessage);
-            //}
+            CreateSpotCommand createSpotCommand = new(
+                -45m,
+                -154.59843m,
+                1546.52m,
+                "MyFavoriteSpot",
+                new Guid(newUserAuth.IdUser!.ToString())
+                //new Guid("37FF90EB-0E05-4FF7-9D11-FBBCCEFE59AD"),
+                //new Guid("9953864A-1857-4545-804B-FFA7AB76E0B7")
+            );
+            ICqsResult resultSpot = spotRepository.Execute(createSpotCommand);
+            Console.WriteLine($"Spot created : {resultSpot.IsSuccess}");
+            if (resultSpot.IsFailure)
+            {
+                Console.WriteLine($"Spot created : {resultSpot.IsFailure}");
+                Console.WriteLine(resultSpot.ErrorMessage);
+            }
 
             #endregion
 
@@ -171,7 +171,7 @@ namespace Coordinates_ConsoleTest
             //        Console.WriteLine($"ResultEnd: Name = {newSpotStart.Name}");
             //    }
 
-            //    //lat = 50.476236 & lon = 4.473592
+            //    lat = 50.476236 & lon = 4.473592
 
             //    GetSpotQuery getSpotQueryEnd = new(longitude: 4.473592m, latitude: 50.476236m);
             //    ICqsResult<Spot_Get> resultEnd = await spotRepository.ExecuteAsync(getSpotQueryEnd);
@@ -220,7 +220,7 @@ namespace Coordinates_ConsoleTest
             //            (newSpotEnd.Longitude, newSpotEnd.Latitude)
             //        },
             //        envConfig.Get("SECURITY_ORS_KEY")!
-            //    ) ;
+            //    );
 
             //    ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
             //    Console.WriteLine("After ORS");
