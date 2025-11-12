@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Coordiantes_Tools.Results;
 
-namespace Coordiantes_Tools.Results
+namespace Coordinates_API.Dtos.Result
 {
-    internal class Result : ICqsResult
+    internal class Result : IApiResult
     {
 
         public bool IsSuccess { get; }
-        public bool IsFailure { get
+        public bool IsFailure
+        {
+            get
             {
                 return !IsSuccess;
             }
@@ -24,23 +22,22 @@ namespace Coordiantes_Tools.Results
         }
     }
 
-    internal class Result<TResult> : ICqsResult<TResult>
+    internal class Result<TResult> : IApiResult<TResult>
     {
         private readonly TResult? _content;
 
         public bool IsSuccess { get; }
         public bool IsFailure { get { return !IsSuccess; } }
         public string? ErrorMessage { get; }
-        public TResult? Content 
+        public TResult? Content
         {
-            get 
+            get
             {
                 if (IsFailure)
-                    //return default(TResult?);
-                    throw new InvalidOperationException();
+                    return default(TResult);
 
                 return _content;
-            } 
+            }
         }
         internal Result(bool isSuccess, TResult? content, string? errorMessage)
         {
@@ -49,6 +46,4 @@ namespace Coordiantes_Tools.Results
             ErrorMessage = errorMessage;
         }
     }
-
-
 }

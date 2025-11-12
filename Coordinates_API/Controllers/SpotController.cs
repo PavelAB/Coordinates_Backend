@@ -1,0 +1,48 @@
+﻿using Coordiantes_Tools.Results;
+using Coordinates_API.Dtos.Result;
+using Coordinates_API.Dtos.Spot;
+using Coordinates_API.Mappers;
+using Coordinates_CQS_Domain.Entities.Spot;
+using Coordinates_CQS_Domain.Queries.Spot;
+using Coordinates_CQS_Domain.Repositories;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Coordinates_API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SpotController : Controller
+    {
+        private readonly ISpotRepository _spotRepository;
+
+        public SpotController(ISpotRepository spotRepository)
+        {
+            this._spotRepository = spotRepository;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetSpotById(SpotGet searchedSpot)
+        {
+            try
+            {
+
+                GetSpotQuery getSpotQueryStart = new(longitude: searchedSpot.Longitude, latitude: searchedSpot.Latitude);
+
+                ICqsResult<Spot_Get> spot = await _spotRepository.ExecuteAsync(getSpotQueryStart);
+
+                IApiResult<Spot_Get> result = spot.ToIApiResult();
+
+                if (result.IsFailure)
+                    BadRequest(result);
+
+                return Ok(result);
+                
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, IApiResult.Failure(e.Message));
+            }
+            
+        }
+    }
+}

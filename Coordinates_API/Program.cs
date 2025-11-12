@@ -69,6 +69,8 @@ namespace Coordinates_API
 
             builder.Services.AddScoped<ITokenRepository, TokenService>();
             builder.Services.AddScoped<IAuthRepository,AuthService>();
+            builder.Services.AddScoped<ISpotRepository,SpotService>();
+
 
             var app = builder.Build();
 
