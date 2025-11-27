@@ -13,7 +13,7 @@ namespace Coordinates_CQS_Domain.Repositories
 {
     public interface ISpotRepository: 
         ICommandHandler<CreateSpotCommand>,
-        IAsyncQueryHandler<GetSpotQuery, Spot_Get>
+        IAsyncQueryHandler<GetSpotQuery, List<Spot_Get>>
     {
 
     }

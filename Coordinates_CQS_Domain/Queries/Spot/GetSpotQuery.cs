@@ -9,7 +9,7 @@ using Coordinates_CQS_Domain.Entities.Spot;
 
 namespace Coordinates_CQS_Domain.Queries.Spot
 {
-    public class GetSpotQuery : IQueryDefinition<S.Spot_Get>
+    public class GetSpotQuery : IQueryDefinition<List<S.Spot_Get>>
     {
         public Guid? IdSpot { get; }
         public decimal? Longitude { get; } = null;

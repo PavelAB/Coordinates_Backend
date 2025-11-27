@@ -56,9 +56,8 @@ namespace Coordinates_CQS_Domain.Services
                 }
             }
         }
-
         
-        public async ValueTask<ICqsResult<Spot_Get>> ExecuteAsync(GetSpotQuery query)
+        public async ValueTask<ICqsResult<List<Spot_Get>>> ExecuteAsync(GetSpotQuery query)
         {
             using(SqlConnection connection = new(_connectonString))
             {
@@ -73,7 +72,7 @@ namespace Coordinates_CQS_Domain.Services
                     command.Parameters.AddWithValue("@CreatedBy", query.CreatedBy);
                     command.Parameters.AddWithValue("@IsPrivate", query.IsPrivate);
 
-                    Spot_Get spot = null;
+                    Dictionary<Guid, Spot_Get> DictionaryOfSpots = [];
 
                     connection.Open();
 
@@ -81,14 +80,27 @@ namespace Coordinates_CQS_Domain.Services
                     {
                         while (reader.Read())
                         {
-                            spot = reader.ToSpot_Get();
+                            Spot_Get spot = reader.ToSpot_Get();
+
+                            if (DictionaryOfSpots.ContainsKey(spot.IdSpot)) 
+                            {
+                                // if (Surface) 
+                                // if (EntityType) 
+                                // if (Validate) 
+                                // if (Rating) 
+                                // if (Comment)                                
+                            }
+
+                            DictionaryOfSpots.Add(spot.IdSpot, spot);
                         }
                     }
 
-                    if (spot is not null)
-                        return ICqsResult<Spot_Get>.Success(spot);
+                    List<Spot_Get> spots = [];
+
+                    if (spots is null)
+                        return ICqsResult<List<Spot_Get>>.Failure("No content");
                     else
-                        return ICqsResult<Spot_Get>.Failure("No content");
+                        return ICqsResult<List<Spot_Get>>.Success(spots);
                 }
             }    
         }

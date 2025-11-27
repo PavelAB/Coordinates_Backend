@@ -25,12 +25,11 @@ namespace Coordinates_API.Controllers
         {
             try
             {
-
                 GetSpotQuery getSpotQueryStart = new(longitude: searchedSpot.Longitude, latitude: searchedSpot.Latitude);
 
-                ICqsResult<Spot_Get> spot = await _spotRepository.ExecuteAsync(getSpotQueryStart);
+                ICqsResult<List<Spot_Get>> spots = await _spotRepository.ExecuteAsync(getSpotQueryStart);
 
-                IApiResult<Spot_Get> result = spot.ToIApiResult();
+                IApiResult<List<Spot_Get>> result = spots.ToIApiResult();
 
                 if (result.IsFailure)
                     BadRequest(result);
@@ -58,8 +57,8 @@ namespace Coordinates_API.Controllers
             {
                 GetSpotQuery getSpots = new(idSpot, longitude, latitude, name, createdBy, isPrivate);
 
-                ICqsResult<Spot_Get> spots = await _spotRepository.ExecuteAsync(getSpots);
-                IApiResult<Spot_Get> result = spots.ToIApiResult();
+                ICqsResult<List<Spot_Get>> spots = await _spotRepository.ExecuteAsync(getSpots);
+                IApiResult<List<Spot_Get>> result = spots.ToIApiResult();
 
                 if (result.IsFailure)
                     return BadRequest(result);
