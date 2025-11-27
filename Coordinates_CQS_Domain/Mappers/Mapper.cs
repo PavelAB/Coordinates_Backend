@@ -1,4 +1,5 @@
 ﻿using Coordiantes_Tools.External.ORS.Dtos;
+using Coordinates_CQS_Domain.Entities.EntityType;
 using Coordinates_CQS_Domain.Entities.Spot;
 using Coordinates_CQS_Domain.Entities.Surface;
 using Coordinates_CQS_Domain.Entities.Track;
@@ -45,6 +46,8 @@ namespace Coordinates_CQS_Domain.Mappers
 
 
             Surface tempSurface = new((Guid)record["IdSurface"], (string)record["SurfaceType"]);
+            EntityType tempEntityType = new((Guid)record["IdEntityType"], (string)record["EntityName"]);
+            
 
 
             Spot_Get tempSpot = new Spot_Get()
@@ -60,6 +63,7 @@ namespace Coordinates_CQS_Domain.Mappers
             };
 
             tempSpot.Surfaces.Add(tempSurface);
+            tempSpot.EntityTypes.Add(tempEntityType);
             return tempSpot;
         }
 

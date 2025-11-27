@@ -74,40 +74,47 @@ namespace Coordinates_CQS_Domain.Services
 
                     Dictionary<Guid, Spot_Get> DictionaryOfSpots = new();
 
-                    connection.Open();
-
-                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    try
                     {
-                        while (reader.Read())
+                        connection.Open();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            Spot_Get spot = reader.ToSpot_Get();
-
-                            if (DictionaryOfSpots.ContainsKey(spot.IdSpot)) 
+                            while (reader.Read())
                             {
-                                if (!DictionaryOfSpots[spot.IdSpot].Surfaces.Any(s => s.IdSurface == spot.Surfaces?[0].IdSurface))
-                                    DictionaryOfSpots[spot.IdSpot].Surfaces.Add(spot.Surfaces?[0]);
-                                    
-                                // if (EntityType) 
-                                // if (Validate) 
-                                // if (Rating) 
-                                // if (Comment)                                
-                            }
-                            else
-                            {
-                                DictionaryOfSpots.Add(spot.IdSpot, spot);
+                                Spot_Get spot = reader.ToSpot_Get();
+
+                                if (DictionaryOfSpots.ContainsKey(spot.IdSpot))
+                                {
+                                    if (!DictionaryOfSpots[spot.IdSpot].Surfaces.Any(s => s.IdSurface == spot.Surfaces?[0].IdSurface))
+                                        DictionaryOfSpots[spot.IdSpot].Surfaces.Add(spot.Surfaces[0]);
+
+                                    if (!DictionaryOfSpots[spot.IdSpot].EntityTypes.Any(et => et.IdEntityType == spot.EntityTypes?[0].IdEntityType))
+                                        DictionaryOfSpots[spot.IdSpot].EntityTypes.Add(spot.EntityTypes[0]);
+                                }
+                                else
+                                {
+                                    DictionaryOfSpots.Add(spot.IdSpot, spot);
+
+                                }
 
                             }
-
                         }
+
+                        List<Spot_Get> spots = DictionaryOfSpots.Values.ToList();
+
+
+                        if (spots is null)
+                            return ICqsResult<List<Spot_Get>>.Failure("No content");
+                        else
+                            return ICqsResult<List<Spot_Get>>.Success(spots);
+                    }
+                    catch (Exception e)
+                    {
+                        return ICqsResult<List<Spot_Get>>.Failure(e.Message);
                     }
 
-                    List<Spot_Get> spots = DictionaryOfSpots.Values.ToList();
-
-
-                    if (spots is null)
-                        return ICqsResult<List<Spot_Get>>.Failure("No content");
-                    else
-                        return ICqsResult<List<Spot_Get>>.Success(spots);
+                    
                 }
             }    
         }

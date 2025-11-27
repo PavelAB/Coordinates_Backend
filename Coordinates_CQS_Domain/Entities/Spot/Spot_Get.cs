@@ -1,4 +1,5 @@
-﻿using Coordinates_CQS_Domain.Entities.Surface;
+﻿using Coordinates_CQS_Domain.Entities.EntityType;
+using Coordinates_CQS_Domain.Entities.Surface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Coordinates_CQS_Domain.Entities.Spot
         public Guid? UpdatedBy { get; set; } = null;
         public Guid? DeletedBy { get; set; } = null;
         public List<Surface.Surface> Surfaces { get; set; } = [];
+        public List<EntityType.EntityType> EntityTypes { get; set; } = [];
         
 
     }
