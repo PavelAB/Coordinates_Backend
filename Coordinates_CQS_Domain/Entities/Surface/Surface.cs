@@ -9,8 +9,8 @@ namespace Coordinates_CQS_Domain.Entities.Surface
     public class Surface
     {
 
-        Guid IdSurface { get; set; }
-        string SurfaceType { get; set; }
+        public Guid IdSurface { get; set; }
+        public string SurfaceType { get; set; }
         public Surface(Guid idSurface, string surfaceType)
         {
             IdSurface = idSurface;

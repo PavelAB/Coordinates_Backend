@@ -1,5 +1,6 @@
 ﻿using Coordiantes_Tools.External.ORS.Dtos;
 using Coordinates_CQS_Domain.Entities.Spot;
+using Coordinates_CQS_Domain.Entities.Surface;
 using Coordinates_CQS_Domain.Entities.Track;
 using Coordinates_CQS_Domain.Entities.User;
 using System;
@@ -43,7 +44,10 @@ namespace Coordinates_CQS_Domain.Mappers
                 throw new ArgumentNullException(nameof(record));
 
 
-            return new Spot_Get()
+            Surface tempSurface = new((Guid)record["IdSurface"], (string)record["SurfaceType"]);
+
+
+            Spot_Get tempSpot = new Spot_Get()
             {
                 IdSpot = (Guid)record["IdSpot"],
                 Latitude = (decimal)record["Latitude"],
@@ -54,6 +58,9 @@ namespace Coordinates_CQS_Domain.Mappers
                 CreatedAt = (DateTime)record["CreatedAt"],
                 CreatedBy = (Guid)record["CreatedBy"]
             };
+
+            tempSpot.Surfaces.Add(tempSurface);
+            return tempSpot;
         }
 
         public static TrackCreate MapToTrackCreate(string orsJson)

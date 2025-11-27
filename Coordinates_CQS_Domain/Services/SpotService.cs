@@ -72,7 +72,7 @@ namespace Coordinates_CQS_Domain.Services
                     command.Parameters.AddWithValue("@CreatedBy", query.CreatedBy);
                     command.Parameters.AddWithValue("@IsPrivate", query.IsPrivate);
 
-                    Dictionary<Guid, Spot_Get> DictionaryOfSpots = [];
+                    Dictionary<Guid, Spot_Get> DictionaryOfSpots = new();
 
                     connection.Open();
 
@@ -84,18 +84,25 @@ namespace Coordinates_CQS_Domain.Services
 
                             if (DictionaryOfSpots.ContainsKey(spot.IdSpot)) 
                             {
-                                // if (Surface) 
+                                if (!DictionaryOfSpots[spot.IdSpot].Surfaces.Any(s => s.IdSurface == spot.Surfaces?[0].IdSurface))
+                                    DictionaryOfSpots[spot.IdSpot].Surfaces.Add(spot.Surfaces?[0]);
+                                    
                                 // if (EntityType) 
                                 // if (Validate) 
                                 // if (Rating) 
                                 // if (Comment)                                
                             }
+                            else
+                            {
+                                DictionaryOfSpots.Add(spot.IdSpot, spot);
 
-                            DictionaryOfSpots.Add(spot.IdSpot, spot);
+                            }
+
                         }
                     }
 
-                    List<Spot_Get> spots = [];
+                    List<Spot_Get> spots = DictionaryOfSpots.Values.ToList();
+
 
                     if (spots is null)
                         return ICqsResult<List<Spot_Get>>.Failure("No content");
