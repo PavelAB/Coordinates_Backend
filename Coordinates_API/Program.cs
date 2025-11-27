@@ -61,8 +61,9 @@ namespace Coordinates_API
                             
                                   policy =>
                                   {
-                                      policy.WithOrigins("http://localhost:4200").AllowAnyHeader();
-                                      //policy.WithOrigins("http://localhost:4200");
+                                      //policy.AllowAnyOrigin().AllowAnyHeader();
+                                      //policy.WithOrigins("http://localhost:8080").AllowAnyHeader();
+                                      policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
                                   });
             });
 

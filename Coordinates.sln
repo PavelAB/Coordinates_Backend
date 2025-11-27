@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "�
 		env_Example.txt = env_Example.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coordinates_Tests", "Coordinates_Tests\Coordinates_Tests.csproj", "{37955606-EB1D-40D8-A847-2B7547C439D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{1B21DA2C-5371-43DC-8C06-3559AC74A565}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B21DA2C-5371-43DC-8C06-3559AC74A565}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B21DA2C-5371-43DC-8C06-3559AC74A565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37955606-EB1D-40D8-A847-2B7547C439D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37955606-EB1D-40D8-A847-2B7547C439D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37955606-EB1D-40D8-A847-2B7547C439D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37955606-EB1D-40D8-A847-2B7547C439D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,8 +35,6 @@ namespace Coordinates_API.Controllers
 
                 IApiResult<User> authUser = _authRepository.Execute(new CheckPasswordQuery(value.Login, value.Password)).ToIApiResult();
 
-
-
                 if (authUser.IsFailure)
                     return BadRequest(authUser);
 

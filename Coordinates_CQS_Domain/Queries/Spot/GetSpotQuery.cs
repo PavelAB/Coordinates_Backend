@@ -16,21 +16,21 @@ namespace Coordinates_CQS_Domain.Queries.Spot
         public decimal? Latitude { get; } = null;
         public string? Name { get; } = null;
         public Guid? CreatedBy { get; } = null;
-        public bool? IsPriivate { get; } = null;
+        public bool? IsPrivate { get; } = null;
         public GetSpotQuery(
              Guid? idSpot = null, 
              decimal? longitude = null, 
              decimal? latitude = null,
              string? name = null, 
              Guid? createdBy = null, 
-             bool? isPriivate = null)
+             bool? isPrivate = null)
         {
             IdSpot = idSpot;
             Longitude = longitude;
             Latitude = latitude;
             Name = name;
             CreatedBy = createdBy;
-            IsPriivate = isPriivate;
+            IsPrivate = isPrivate;
         }
     }
 }

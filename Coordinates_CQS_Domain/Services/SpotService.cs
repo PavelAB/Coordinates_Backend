@@ -71,7 +71,7 @@ namespace Coordinates_CQS_Domain.Services
                     command.Parameters.AddWithValue("@Longitude", query.Longitude);
                     command.Parameters.AddWithValue("@Name", query.Name);
                     command.Parameters.AddWithValue("@CreatedBy", query.CreatedBy);
-                    command.Parameters.AddWithValue("@IsPrivate", query.IsPriivate);
+                    command.Parameters.AddWithValue("@IsPrivate", query.IsPrivate);
 
                     Spot_Get spot = null;
 

@@ -20,7 +20,7 @@ namespace Coordinates_API.Controllers
             this._spotRepository = spotRepository;
         }
 
-        [HttpPost]
+        [HttpPost("GetByCoordinates")]
         public async Task<IActionResult> GetSpotById(SpotGet searchedSpot)
         {
             try
@@ -43,6 +43,34 @@ namespace Coordinates_API.Controllers
                 return StatusCode(500, IApiResult.Failure(e.Message));
             }
             
+        }
+
+        [HttpGet("GetSpots")]
+        public async Task<IActionResult> GetSpots(
+            [FromQuery] Guid? idSpot,
+            [FromQuery] decimal? latitude,
+            [FromQuery] decimal? longitude,
+            [FromQuery] string? name,
+            [FromQuery] Guid? createdBy,
+            [FromQuery] bool? isPrivate )
+        {
+            try
+            {
+                GetSpotQuery getSpots = new(idSpot, longitude, latitude, name, createdBy, isPrivate);
+
+                ICqsResult<Spot_Get> spots = await _spotRepository.ExecuteAsync(getSpots);
+                IApiResult<Spot_Get> result = spots.ToIApiResult();
+
+                if (result.IsFailure)
+                    return BadRequest(result);
+
+
+                return Ok(result);
+            }
+            catch (Exception e )
+            {
+                return StatusCode(500, IApiResult.Failure(e.Message));
+            }
         }
     }
 }
