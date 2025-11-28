@@ -24,8 +24,6 @@ namespace Coordinates_CQS_Domain.Services
 
         public ICqsResult Execute(CreateSpotCommand command)
         {
-            
-
             using (SqlConnection connection = new(_connectonString))
             {
                 using (SqlCommand sqlCommand = connection.CreateCommand())
@@ -59,7 +57,7 @@ namespace Coordinates_CQS_Domain.Services
         
         public async ValueTask<ICqsResult<List<Spot_Get>>> ExecuteAsync(GetSpotQuery query)
         {
-            using(SqlConnection connection = new(_connectonString))
+            using (SqlConnection connection = new(_connectonString))
             {
                 using(SqlCommand command = connection.CreateCommand())
                 {
@@ -112,11 +110,49 @@ namespace Coordinates_CQS_Domain.Services
                     catch (Exception e)
                     {
                         return ICqsResult<List<Spot_Get>>.Failure(e.Message);
-                    }
-
-                    
+                    }                    
                 }
             }    
+        }
+
+        public async ValueTask<ICqsResult<List<Spot_Light>>> ExecuteAsync(GetSpotLight query)
+        {
+            using (SqlConnection connection = new(_connectonString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "dbo.SP_Spot_Get_Light";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@IdSpot", query.IdSpot);
+                    command.Parameters.AddWithValue("@Latitude", query.Latitude);
+                    command.Parameters.AddWithValue("@Longitude", query.Longitude);
+                    command.Parameters.AddWithValue("@Name", query.Name);
+                    command.Parameters.AddWithValue("@CreatedBy", query.CreatedBy);
+                    command.Parameters.AddWithValue("@IsPrivate", query.IsPrivate);
+
+                    try
+                    {
+                        connection.Open();
+
+                        List<Spot_Light> spots = [];
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (reader.Read())
+                            {
+                                Spot_Light tempSpot = reader.ToSpot_Light();
+                                spots.Add(tempSpot);
+                            }
+
+                            return ICqsResult<List<Spot_Light>>.Success(spots);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        return ICqsResult<List<Spot_Light>>.Failure(e.Message);
+                    }
+                }
+            }
         }
     }
 }

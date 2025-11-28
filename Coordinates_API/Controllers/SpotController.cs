@@ -5,6 +5,7 @@ using Coordinates_API.Mappers;
 using Coordinates_CQS_Domain.Entities.Spot;
 using Coordinates_CQS_Domain.Queries.Spot;
 using Coordinates_CQS_Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Coordinates_API.Controllers
@@ -21,6 +22,7 @@ namespace Coordinates_API.Controllers
         }
 
         [HttpPost("GetByCoordinates")]
+        [Authorize]
         public async Task<IActionResult> GetSpotById(SpotGet searchedSpot)
         {
             try
@@ -45,6 +47,7 @@ namespace Coordinates_API.Controllers
         }
 
         [HttpGet("GetSpots")]
+        [Authorize]
         public async Task<IActionResult> GetSpots(
             [FromQuery] Guid? idSpot,
             [FromQuery] decimal? latitude,
@@ -68,6 +71,35 @@ namespace Coordinates_API.Controllers
             }
             catch (Exception e )
             {
+                return StatusCode(500, IApiResult.Failure(e.Message));
+            }
+        }
+
+        [HttpGet("GetSpotsLight")]
+        public async Task<IActionResult> GetSpotsLight(
+            [FromQuery] Guid? idSpot,
+            [FromQuery] decimal? latitude,
+            [FromQuery] decimal? longitude,
+            [FromQuery] string? name,
+            [FromQuery] Guid? createdBy,
+            [FromQuery] bool? isPrivate)
+        {
+            try
+            {
+                GetSpotLight spotsLight = new(idSpot, longitude, latitude, name, createdBy, isPrivate);
+
+                ICqsResult<List<Spot_Light>> spots = await _spotRepository.ExecuteAsync(spotsLight);
+                IApiResult<List<Spot_Light>> result = spots.ToIApiResult();
+
+                if (result.IsFailure)
+                    return BadRequest(result);
+
+                return Ok(result);
+
+            }
+            catch (Exception e)
+            {
+
                 return StatusCode(500, IApiResult.Failure(e.Message));
             }
         }

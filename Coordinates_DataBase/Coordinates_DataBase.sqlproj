@@ -106,6 +106,7 @@
     <Build Include="Procedures\SP_Spot_Get.sql" />
     <Build Include="Procedures\SP_Track_Create.sql" />
     <Build Include="Procedures\SP_User_GetById.sql" />
+    <Build Include="Procedures\SP_Spot_Get_Light.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />

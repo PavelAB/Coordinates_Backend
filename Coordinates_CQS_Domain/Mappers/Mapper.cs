@@ -67,6 +67,22 @@ namespace Coordinates_CQS_Domain.Mappers
             return tempSpot;
         }
 
+        public static Spot_Light ToSpot_Light(this IDataReader record)
+        {
+            if (record is null)
+                throw new ArgumentNullException(nameof(record));
+
+            Spot_Light tempSpot = new()
+            {
+                IdSpot = (Guid)record["IdSpot"],
+                Latitude = (decimal)record["Latitude"],
+                Longitude = (decimal)record["Longitude"],
+                Elevation = (decimal)record["Elevation"]
+            };
+
+            return tempSpot;
+        }
+
         public static TrackCreate MapToTrackCreate(string orsJson)
         {
             OrsFeatureCollection dto = JsonSerializer.Deserialize<OrsFeatureCollection>(
