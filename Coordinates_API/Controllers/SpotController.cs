@@ -58,6 +58,26 @@ namespace Coordinates_API.Controllers
         {
             try
             {
+                string[] allowedKeys = new[]
+                    {
+                        "idSpot",
+                        "latitude",
+                        "longitude",
+                        "name",
+                        "createdBy",
+                        "isPrivate"
+                    };
+
+                IEnumerable<string> queryKeys = HttpContext.Request.Query.Keys;
+
+                List<string> invalidParams = queryKeys
+                    .Except(allowedKeys, StringComparer.OrdinalIgnoreCase)
+                    .ToList();
+
+                if (invalidParams.Any())
+                    return BadRequest(invalidParams);
+
+
                 GetSpotQuery getSpots = new(idSpot, longitude, latitude, name, createdBy, isPrivate);
 
                 ICqsResult<List<Spot_Get>> spots = await _spotRepository.ExecuteAsync(getSpots);

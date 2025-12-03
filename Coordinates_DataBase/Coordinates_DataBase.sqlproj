@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
+    <None Include="Coordinates_DataBase_Test.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\LoadDbTest.sql" />

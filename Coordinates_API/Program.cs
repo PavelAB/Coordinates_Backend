@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Coordinates_API
 {
-    public class Program
+    public partial class Program
     {
         public static void Main(string[] args)
         {
@@ -35,8 +35,8 @@ namespace Coordinates_API
             builder.Services.AddSingleton<EnvConfig>();
 
             JwtOptions jwtOptions = new(
-                envConfig.Get("TOKEN_ISSUER")!, 
-                envConfig.Get("TOKEN_AUDIENCE")!, 
+                envConfig.Get("TOKEN_ISSUER")!,
+                envConfig.Get("TOKEN_AUDIENCE")!,
                 envConfig.Get("TOKEN_SECURITY_KEY")!
                 );
             builder.Services.AddSingleton(sp => jwtOptions);
@@ -58,7 +58,7 @@ namespace Coordinates_API
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
-                            
+
                                   policy =>
                                   {
                                       //policy.AllowAnyOrigin().AllowAnyHeader();
@@ -69,8 +69,8 @@ namespace Coordinates_API
 
 
             builder.Services.AddScoped<ITokenRepository, TokenService>();
-            builder.Services.AddScoped<IAuthRepository,AuthService>();
-            builder.Services.AddScoped<ISpotRepository,SpotService>();
+            builder.Services.AddScoped<IAuthRepository, AuthService>();
+            builder.Services.AddScoped<ISpotRepository, SpotService>();
 
 
             var app = builder.Build();
@@ -92,6 +92,10 @@ namespace Coordinates_API
             app.MapControllers();
 
             app.Run();
+
+
         }
+        
     }
+
 }
