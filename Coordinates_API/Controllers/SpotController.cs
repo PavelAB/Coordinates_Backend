@@ -2,6 +2,7 @@
 using Coordinates_API.Dtos.Result;
 using Coordinates_API.Dtos.Spot;
 using Coordinates_API.Mappers;
+using Coordinates_CQS_Domain.Commands.Spot;
 using Coordinates_CQS_Domain.Entities.Spot;
 using Coordinates_CQS_Domain.Queries.Spot;
 using Coordinates_CQS_Domain.Repositories;
@@ -120,6 +121,29 @@ namespace Coordinates_API.Controllers
             catch (Exception e)
             {
 
+                return StatusCode(500, IApiResult.Failure(e.Message));
+            }
+        }
+
+        [HttpPost("CreateSpot")]
+        [Authorize]
+        public async Task<IActionResult> CreateSpot(SpotCreate value)
+        {
+            try
+            {
+                CreateSpotCommand newSpot = new(value.Latitude, value.Longitude, value.Elevation, value.CreatedBy, value.Name, value.EntityType, value.SurfaceType);
+
+                ICqsResult cqsResult = _spotRepository.Execute(newSpot);
+
+                IApiResult result = cqsResult.ToIApiResult();
+
+                if(result.IsFailure)
+                    return BadRequest(result);
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
                 return StatusCode(500, IApiResult.Failure(e.Message));
             }
         }

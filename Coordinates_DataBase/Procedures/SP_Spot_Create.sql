@@ -42,7 +42,7 @@ BEGIN
                         VALUES (@Latitude, @Longitude, @Elevation, @Name, @IdUser);
                     END            
                 END
-            ELSE
+            
 
             -- ====
 
