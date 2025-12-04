@@ -111,6 +111,7 @@
     <Build Include="Procedures\Track\CreateTrack.sql" />
     <Build Include="Procedures\Track\CreateTrackValidation.sql" />
     <Build Include="Procedures\Track\SP_Track_Create.sql" />
+    <Build Include="Procedures\Track\SP_Track_Get.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />

@@ -67,6 +67,36 @@ namespace Coordinates_CQS_Domain.Mappers
             return tempSpot;
         }
 
+        public static Track_Get ToTrack_Get(this IDataReader record)
+        {
+            if (record == null)
+                throw new ArgumentNullException(nameof(record));
+
+
+            Surface tempSurface = new((Guid)record["IdSurface"], (string)record["SurfaceType"]);
+            EntityType tempEntityType = new((Guid)record["IdEntityType"], (string)record["EntityName"]);
+
+
+
+            Track_Get tempTrack = new()
+            {
+                IdTrack = (Guid)record["IdTrack"],
+                Distance = (decimal)record["Distance"],
+                Ascent = (decimal)record["Ascent"],
+                Descent = (decimal)record["Descent"],
+                IsDeleted = (bool)record["IsDeleted"],
+                IsPrivate = (bool)record["IsPrivate"],
+                Name = (string)record["Name"],
+                PolyLine = (string)record["PolyLine"],
+                CreatedAt = (DateTime)record["CreatedAt"],
+                CreatedBy = (Guid)record["CreatedBy"]
+            };
+
+            tempTrack.Surfaces.Add(tempSurface);
+            tempTrack.EntityTypes.Add(tempEntityType);
+            return tempTrack;
+        }
+
         public static Spot_Light ToSpot_Light(this IDataReader record)
         {
             if (record is null)

@@ -9,6 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Coordinates_CQS_Domain.Entities.Track;
+using Coordinates_CQS_Domain.Queries.Track;
+using Coordinates_CQS_Domain.Mappers;
+using Coordinates_CQS_Domain.Entities.Spot;
 
 namespace Coordinates_CQS_Domain.Services
 {
@@ -55,6 +59,49 @@ namespace Coordinates_CQS_Domain.Services
                     }
                 }
             }
+        }
+
+        public async ValueTask<ICqsResult<List<Track_Get>>> ExecuteAsync(GetTrackQuery query)
+        {
+            try
+            {
+                using (SqlConnection connection = new(_connectonString))
+                {
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = "dbo.SP_Track_Get";
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdTrack", query.IdTrack);
+                        command.Parameters.AddWithValue("@Distance", query.Distance);
+                        command.Parameters.AddWithValue("@Ascent", query.Ascent);
+                        command.Parameters.AddWithValue("@Descent", query.Descent);
+                        command.Parameters.AddWithValue("@Name", query.Name);
+                        command.Parameters.AddWithValue("@CreatedBy", query.CreatedBy);
+
+                        connection.Open();
+
+                        List<Track_Get> tracks = [];
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (reader.Read())
+                            {
+                                Track_Get tempTrack = reader.ToTrack_Get();
+                                tracks.Add(tempTrack);
+                            }
+
+                            return ICqsResult<List<Track_Get>>.Success(tracks);
+                        }
+
+                            
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return ICqsResult<List<Track_Get>>.Failure(e.Message);
+            }
+            
         }
     }
 }
