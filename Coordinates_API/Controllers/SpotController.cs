@@ -147,5 +147,31 @@ namespace Coordinates_API.Controllers
                 return StatusCode(500, IApiResult.Failure(e.Message));
             }
         }
+        [HttpPut("UpdateSpot")]
+        [Authorize]
+        public async Task<IActionResult> UpdateSpot(SpotUpdate value)
+        {
+            try
+            {
+                UpdateSpotCommand newSpot = new(
+                    value.IdSpot,
+                    value.UpdatedBy,
+                    value.Latitude,
+                    value.Longitude,
+                    value.Elevation,
+                    value.IsPrivate,
+                    value.Name);
+                ICqsResult cqsResult = _spotRepository.Execute(newSpot);
+                IApiResult result = cqsResult.ToIApiResult();
+
+                if(result.IsFailure)
+                    return BadRequest(result);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, IApiResult.Failure(e.Message));
+            }
+        }
     }
 }

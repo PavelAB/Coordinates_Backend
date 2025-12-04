@@ -12,6 +12,7 @@ using System.Data;
 using Coordinates_CQS_Domain.Entities.Spot;
 using Coordinates_CQS_Domain.Queries.Spot;
 using Coordinates_CQS_Domain.Mappers;
+using System.Collections;
 
 namespace Coordinates_CQS_Domain.Services
 {
@@ -56,7 +57,38 @@ namespace Coordinates_CQS_Domain.Services
                 }
             }
         }
-        
+
+        public ICqsResult Execute(UpdateSpotCommand command)
+        {
+            try
+            {
+                using (SqlConnection connection = new(_connectonString))
+                {
+                    using (SqlCommand sqlCommand = connection.CreateCommand())
+                    {
+                        sqlCommand.CommandText = "dbo.SP_Spot_Update";
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("IdSpot", command.IdSpot);
+                        sqlCommand.Parameters.AddWithValue("@Latitude", command.Latitude);
+                        sqlCommand.Parameters.AddWithValue("@Longitude", command.Longitude);
+                        sqlCommand.Parameters.AddWithValue("@Elevation", command.Elevation);
+                        sqlCommand.Parameters.AddWithValue("@IsPrivate", command.IsPrivate);
+                        sqlCommand.Parameters.AddWithValue("@Name", command.Name);
+                        sqlCommand.Parameters.AddWithValue("UpdatedBy", command.UpdatedBy);
+
+                        connection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        return ICqsResult.Success();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return ICqsResult.Failure(e.Message);
+            }
+            
+        }
+
         public async ValueTask<ICqsResult<List<Spot_Get>>> ExecuteAsync(GetSpotQuery query)
         {
             using (SqlConnection connection = new(_connectonString))

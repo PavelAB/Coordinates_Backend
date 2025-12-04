@@ -5,7 +5,6 @@
 	@Elevation DECIMAL(8,2),
 	@Name NVARCHAR(50),
 	@IsPrivate BIT = 0,
-	@CreatedBy UNIQUEIDENTIFIER,
 	@UpdatedBy UNIQUEIDENTIFIER
 AS
 BEGIN
@@ -16,6 +15,9 @@ BEGIN
 			IF NOT EXISTS (SELECT 1 FROM [Spot] WHERE IdSpot = @IdSpot)
                 RAISERROR('Invalid Spot ID.', 16, 1);
 
+			IF NOT EXISTS (SELECT 1 FROM [User] WHERE IdUser = @UpdatedBy)
+                RAISERROR('Invalid UpdateBy ID.', 16, 1);
+
 			UPDATE Spot
 			SET 
 				Latitude = @Latitude,
@@ -23,7 +25,6 @@ BEGIN
 				Elevation = @Elevation,
 				[Name] = @Name,
 				IsPrivate = @IsPrivate,
-				CreatedBy = @CreatedBy,
 				UpdatedBy = @UpdatedBy,
 				UpdatedAt = GETDATE()
 			WHERE IdSpot = @IdSpot
