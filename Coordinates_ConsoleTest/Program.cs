@@ -212,22 +212,23 @@ namespace Coordinates_ConsoleTest
 
             //    Console.WriteLine("Before ORS");
 
+            //end lat=50.606282&lon=4.225678
+            //start lat=50.493968&lon=4.287420
+            GetTrackORSQuery newTrack = new(
+                new (decimal Longitude, decimal Latitude)[]
+                {
+                        (4.287420m, 50.493968m),
+                        (4.225678m, 50.606282m)
+                },
+                envConfig.Get("SECURITY_ORS_KEY")!
+            );
 
-            //    GetTrackORSQuery newTrack = new(
-            //        new (decimal Longitude, decimal Latitude)[]
-            //        {
-            //            (newSpotStart.Longitude, newSpotStart.Latitude),
-            //            (newSpotEnd.Longitude, newSpotEnd.Latitude)
-            //        },
-            //        envConfig.Get("SECURITY_ORS_KEY")!
-            //    );
-
-            //    ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
-            //    Console.WriteLine("After ORS");
-            //    Console.WriteLine($"Distance: {test.Content.Distance} ");
-            //    Console.WriteLine($"PolyLine: {test.Content.PolyLine.Length} ");
-            //    Console.WriteLine($"Ascent: {test.Content.Ascent} ");
-            //    Console.WriteLine($"Descent: {test.Content.Descent} ");
+            ICqsResult<TrackCreate> test = await orsRepository.ExecuteAsync(newTrack);
+            Console.WriteLine("After ORS");
+            Console.WriteLine($"Distance: {test.Content.Distance} ");
+            Console.WriteLine($"PolyLine: {test.Content.PolyLine.Length} ");
+            Console.WriteLine($"Ascent: {test.Content.Ascent} ");
+            Console.WriteLine($"Descent: {test.Content.Descent} ");
 
 
             //    CreateTrackCommand createTrackCommand = new(
