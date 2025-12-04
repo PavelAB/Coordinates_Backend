@@ -153,7 +153,7 @@ namespace Coordinates_API.Controllers
         {
             try
             {
-                UpdateSpotCommand newSpot = new(
+                UpdateSpotCommand newCommand = new(
                     value.IdSpot,
                     value.UpdatedBy,
                     value.Latitude,
@@ -161,7 +161,7 @@ namespace Coordinates_API.Controllers
                     value.Elevation,
                     value.IsPrivate,
                     value.Name);
-                ICqsResult cqsResult = _spotRepository.Execute(newSpot);
+                ICqsResult cqsResult = _spotRepository.Execute(newCommand);
                 IApiResult result = cqsResult.ToIApiResult();
 
                 if(result.IsFailure)
@@ -173,5 +173,29 @@ namespace Coordinates_API.Controllers
                 return StatusCode(500, IApiResult.Failure(e.Message));
             }
         }
+
+        [HttpPost("DeleteSpot")]
+        [Authorize]
+        public async Task<IActionResult> DeleteSpot(SpotDelete value)
+        {
+            try
+            {
+                DeleteSpotCommand newCommand = new(
+                    value.IdSpot,
+                    value.DeletedBy
+                    );
+
+                ICqsResult cqsResult = _spotRepository.Execute(newCommand);
+                IApiResult result = cqsResult.ToIApiResult();
+
+                if (result.IsFailure) return BadRequest();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, IApiResult.Failure(e.Message));
+            }
+        }
+        
     }
 }

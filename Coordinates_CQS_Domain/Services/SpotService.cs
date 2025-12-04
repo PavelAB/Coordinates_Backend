@@ -89,6 +89,31 @@ namespace Coordinates_CQS_Domain.Services
             
         }
 
+        public ICqsResult Execute(DeleteSpotCommand command)
+        {
+            try
+            {
+                using (SqlConnection connection = new(_connectonString))
+                {
+                    using (SqlCommand sqlCommand = connection.CreateCommand())
+                    {
+                        sqlCommand.CommandText = "dbo.SP_Spot_Delete";
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("IdSpot", command.IdSpot);
+                        sqlCommand.Parameters.AddWithValue("@DeletedBy", command.DeletedBy);
+
+                        connection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        return ICqsResult.Success();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return ICqsResult.Failure(e.Message);
+            }
+        }
+
         public async ValueTask<ICqsResult<List<Spot_Get>>> ExecuteAsync(GetSpotQuery query)
         {
             using (SqlConnection connection = new(_connectonString))
