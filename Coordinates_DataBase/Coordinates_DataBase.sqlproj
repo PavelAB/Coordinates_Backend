@@ -60,11 +60,11 @@
     <Folder Include="Data" />
     <Folder Include="Procedures" />
     <Folder Include="Functions" />
+    <Folder Include="Procedures\Spot" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
     <Build Include="Tables\Spot.sql" />
-    <Build Include="Procedures\CreateSpot.sql" />
     <Build Include="Tables\Track.sql" />
     <Build Include="Procedures\CreateTrack.sql" />
     <Build Include="Tables\MM_PolyLine.sql" />
@@ -107,6 +107,9 @@
     <Build Include="Procedures\SP_Track_Create.sql" />
     <Build Include="Procedures\SP_User_GetById.sql" />
     <Build Include="Procedures\SP_Spot_Get_Light.sql" />
+    <Build Include="Procedures\SP_Spot_Update.sql" />
+    <Build Include="Procedures\Spot\CreateSpot.sql" />
+    <Build Include="Procedures\Spot\SP_Spot_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />
