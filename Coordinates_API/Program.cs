@@ -72,6 +72,7 @@ namespace Coordinates_API
             builder.Services.AddScoped<IAuthRepository, AuthService>();
             builder.Services.AddScoped<ISpotRepository, SpotService>();
             builder.Services.AddScoped<IORSRepository, ORSService>();
+            builder.Services.AddScoped<ITrackRepository, TrackService>();
 
 
             var app = builder.Build();

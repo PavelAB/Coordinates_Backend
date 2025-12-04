@@ -61,12 +61,12 @@
     <Folder Include="Procedures" />
     <Folder Include="Functions" />
     <Folder Include="Procedures\Spot" />
+    <Folder Include="Procedures\Track" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\User.sql" />
     <Build Include="Tables\Spot.sql" />
     <Build Include="Tables\Track.sql" />
-    <Build Include="Procedures\CreateTrack.sql" />
     <Build Include="Tables\MM_PolyLine.sql" />
     <Build Include="Procedures\CreatePolyLine.sql" />
     <Build Include="Tables\EntityType.sql" />
@@ -80,7 +80,6 @@
     <Build Include="Tables\MM_FavoriteTrack.sql" />
     <Build Include="Procedures\CreateFavoriteTrack.sql" />
     <Build Include="Tables\MM_TrackValidation.sql" />
-    <Build Include="Procedures\CreateTrackValidation.sql" />
     <Build Include="Tables\Comment.sql" />
     <Build Include="Procedures\CreateComment.sql" />
     <Build Include="Tables\MM_Comment_Spot.sql" />
@@ -102,7 +101,6 @@
     <Build Include="Tables\MM_Spot_EntityType.sql" />
     <Build Include="Tables\MM_Track_Surface.sql" />
     <Build Include="Tables\MM_Track_EntityType.sql" />
-    <Build Include="Procedures\SP_Track_Create.sql" />
     <Build Include="Procedures\SP_User_GetById.sql" />
     <Build Include="Procedures\Spot\CreateSpot.sql" />
     <Build Include="Procedures\Spot\SP_Spot_Delete.sql" />
@@ -110,6 +108,9 @@
     <Build Include="Procedures\Spot\SP_Spot_Update.sql" />
     <Build Include="Procedures\Spot\SP_Spot_Get.sql" />
     <Build Include="Procedures\Spot\SP_Spot_Create.sql" />
+    <Build Include="Procedures\Track\CreateTrack.sql" />
+    <Build Include="Procedures\Track\CreateTrackValidation.sql" />
+    <Build Include="Procedures\Track\SP_Track_Create.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Coordinates_DataBase.publish.xml" />

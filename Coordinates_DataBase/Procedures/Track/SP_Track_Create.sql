@@ -12,8 +12,8 @@
 AS
 BEGIN
 
-    BEGIN TRY
-        BEGIN TRANSACTION
+    BEGIN TRANSACTION
+        BEGIN TRY
             IF @Surface IS NULL
                 SELECT @Surface = IdSurface FROM Surface WHERE SurfaceType = 'No Information'
             IF @EntityType IS NULL
@@ -56,8 +56,8 @@ BEGIN
 
             SELECT @IdTrack;
                                     
-        COMMIT
-    END TRY
+            COMMIT
+        END TRY
     BEGIN CATCH
         ROLLBACK;
 		THROW;       

@@ -14,9 +14,7 @@ namespace Coordinates_CQS_Domain.Commands.Track
             decimal ascent, 
             decimal descent, 
             string polyLine, 
-            Guid createdBy, 
-            List<Guid> wayPointsId, 
-            List<int> wayPointsOrder,
+            Guid createdBy,
             bool? isPrivate = null, 
             Guid? entityType = null, 
             Guid? surfaceType = null, 
@@ -32,8 +30,6 @@ namespace Coordinates_CQS_Domain.Commands.Track
             CreatedBy = createdBy;
             EntityType = entityType;
             Surface = surfaceType;
-            WayPointsId = wayPointsId;
-            WayPointsOrder = wayPointsOrder;
         }
 
         public decimal Distance { get; set; }
@@ -45,8 +41,6 @@ namespace Coordinates_CQS_Domain.Commands.Track
         public Guid CreatedBy { get; set; }
         public Guid? EntityType { get; set; }
         public Guid? Surface { get; set; }
-        public List<Guid> WayPointsId { get; set; }
-        public List<int> WayPointsOrder { get; set; }
 
     }
 }
