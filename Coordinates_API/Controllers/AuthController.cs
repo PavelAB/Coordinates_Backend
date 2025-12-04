@@ -1,5 +1,7 @@
 ﻿using Coordiantes_Tools.Results;
 using Coordinates_API.Dtos;
+using Coordinates_API.Dtos.Result;
+using Coordinates_API.Mappers;
 using Coordinates_CQS_Domain.Entities.User;
 using Coordinates_CQS_Domain.Queries.User;
 using Coordinates_CQS_Domain.Repositories;
@@ -31,7 +33,7 @@ namespace Coordinates_API.Controllers
                 if (value.Login is null || value.Password is null)
                     return BadRequest(ICqsResult.Failure("Invalid input"));
 
-                ICqsResult<User> authUser = _authRepository.Execute(new CheckPasswordQuery(value.Login, value.Password));
+                IApiResult<User> authUser = _authRepository.Execute(new CheckPasswordQuery(value.Login, value.Password)).ToIApiResult();
 
                 if (authUser.IsFailure)
                     return BadRequest(authUser);

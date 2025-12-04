@@ -99,32 +99,32 @@ namespace Coordinates_ConsoleTest
             //ICqsResult<User> resultBad = authRepository.Execute(checkPasswordCommandBad);
             //Console.WriteLine(resultBad.ErrorMessage);
 
-            CheckPasswordQuery checkPasswordCommand = new("Bad2", "0000");
-            ICqsResult<User> result = authRepository.Execute(checkPasswordCommand);
-            User newUserAuth = result.Content;
-            newUserAuth.Token = tokenRepository.GenerateToken(newUserAuth);
-            Console.WriteLine("IdUser: " + result.Content.IdUser);
-            Console.WriteLine("Token: " + result.Content.Token);
+            //CheckPasswordQuery checkPasswordCommand = new("Bad2", "0000");
+            //ICqsResult<User> result = authRepository.Execute(checkPasswordCommand);
+            //User newUserAuth = result.Content;
+            //newUserAuth.Token = tokenRepository.GenerateToken(newUserAuth);
+            //Console.WriteLine("IdUser: " + result.Content.IdUser);
+            //Console.WriteLine("Token: " + result.Content.Token);
             #endregion
 
             #region Create Spot
 
-            CreateSpotCommand createSpotCommand = new(
-                -45m,
-                -154.59843m,
-                1546.52m,
-                "MyFavoriteSpot",
-                new Guid(newUserAuth.IdUser!.ToString())
-                //new Guid("37FF90EB-0E05-4FF7-9D11-FBBCCEFE59AD"),
-                //new Guid("9953864A-1857-4545-804B-FFA7AB76E0B7")
-            );
-            ICqsResult resultSpot = spotRepository.Execute(createSpotCommand);
-            Console.WriteLine($"Spot created : {resultSpot.IsSuccess}");
-            if (resultSpot.IsFailure)
-            {
-                Console.WriteLine($"Spot created : {resultSpot.IsFailure}");
-                Console.WriteLine(resultSpot.ErrorMessage);
-            }
+            //CreateSpotCommand createSpotCommand = new(
+            //    -45m,
+            //    -154.59843m,
+            //    1546.52m,
+            //    "MyFavoriteSpot",
+            //    new Guid(newUserAuth.IdUser!.ToString())
+            //    //new Guid("37FF90EB-0E05-4FF7-9D11-FBBCCEFE59AD"),
+            //    //new Guid("9953864A-1857-4545-804B-FFA7AB76E0B7")
+            //);
+            //ICqsResult resultSpot = spotRepository.Execute(createSpotCommand);
+            //Console.WriteLine($"Spot created : {resultSpot.IsSuccess}");
+            //if (resultSpot.IsFailure)
+            //{
+            //    Console.WriteLine($"Spot created : {resultSpot.IsFailure}");
+            //    Console.WriteLine(resultSpot.ErrorMessage);
+            //}
 
             #endregion
 

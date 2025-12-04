@@ -9,28 +9,28 @@ using Coordinates_CQS_Domain.Entities.Spot;
 
 namespace Coordinates_CQS_Domain.Queries.Spot
 {
-    public class GetSpotQuery : IQueryDefinition<S.Spot_Get>
+    public class GetSpotQuery : IQueryDefinition<List<S.Spot_Get>>
     {
         public Guid? IdSpot { get; }
         public decimal? Longitude { get; } = null;
         public decimal? Latitude { get; } = null;
         public string? Name { get; } = null;
         public Guid? CreatedBy { get; } = null;
-        public bool? IsPriivate { get; } = null;
+        public bool? IsPrivate { get; } = null;
         public GetSpotQuery(
              Guid? idSpot = null, 
              decimal? longitude = null, 
              decimal? latitude = null,
              string? name = null, 
              Guid? createdBy = null, 
-             bool? isPriivate = null)
+             bool? isPrivate = null)
         {
             IdSpot = idSpot;
             Longitude = longitude;
             Latitude = latitude;
             Name = name;
             CreatedBy = createdBy;
-            IsPriivate = isPriivate;
+            IsPrivate = isPrivate;
         }
     }
 }

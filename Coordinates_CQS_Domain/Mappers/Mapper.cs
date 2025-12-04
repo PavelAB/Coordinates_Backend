@@ -1,5 +1,7 @@
 ﻿using Coordiantes_Tools.External.ORS.Dtos;
+using Coordinates_CQS_Domain.Entities.EntityType;
 using Coordinates_CQS_Domain.Entities.Spot;
+using Coordinates_CQS_Domain.Entities.Surface;
 using Coordinates_CQS_Domain.Entities.Track;
 using Coordinates_CQS_Domain.Entities.User;
 using System;
@@ -43,7 +45,12 @@ namespace Coordinates_CQS_Domain.Mappers
                 throw new ArgumentNullException(nameof(record));
 
 
-            return new Spot_Get()
+            Surface tempSurface = new((Guid)record["IdSurface"], (string)record["SurfaceType"]);
+            EntityType tempEntityType = new((Guid)record["IdEntityType"], (string)record["EntityName"]);
+            
+
+
+            Spot_Get tempSpot = new Spot_Get()
             {
                 IdSpot = (Guid)record["IdSpot"],
                 Latitude = (decimal)record["Latitude"],
@@ -54,6 +61,26 @@ namespace Coordinates_CQS_Domain.Mappers
                 CreatedAt = (DateTime)record["CreatedAt"],
                 CreatedBy = (Guid)record["CreatedBy"]
             };
+
+            tempSpot.Surfaces.Add(tempSurface);
+            tempSpot.EntityTypes.Add(tempEntityType);
+            return tempSpot;
+        }
+
+        public static Spot_Light ToSpot_Light(this IDataReader record)
+        {
+            if (record is null)
+                throw new ArgumentNullException(nameof(record));
+
+            Spot_Light tempSpot = new()
+            {
+                IdSpot = (Guid)record["IdSpot"],
+                Latitude = (decimal)record["Latitude"],
+                Longitude = (decimal)record["Longitude"],
+                Elevation = (decimal)record["Elevation"]
+            };
+
+            return tempSpot;
         }
 
         public static TrackCreate MapToTrackCreate(string orsJson)
