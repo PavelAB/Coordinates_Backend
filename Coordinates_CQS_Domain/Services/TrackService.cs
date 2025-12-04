@@ -61,6 +61,39 @@ namespace Coordinates_CQS_Domain.Services
             }
         }
 
+        public ICqsResult Execute(UpdateTrackCommand command)
+        {
+            try
+            {
+                using (SqlConnection connection = new(_connectonString))
+                {
+                    using (SqlCommand sqlCommand = connection.CreateCommand())
+                    {
+                        sqlCommand.CommandText = "dbo.SP_Track_Update";
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
+                        sqlCommand.Parameters.AddWithValue("@IdTrack", command.IdTrack);
+                        sqlCommand.Parameters.AddWithValue("@UpdatedBy", command.UpdatedBy);
+                        sqlCommand.Parameters.AddWithValue("@Distance", command.Distance);
+                        sqlCommand.Parameters.AddWithValue("@Ascent", command.Ascent);
+                        sqlCommand.Parameters.AddWithValue("@Descent", command.Descent);
+                        sqlCommand.Parameters.AddWithValue("@Name", command.Name);
+                        sqlCommand.Parameters.AddWithValue("@IsPrivate", command.IsPrivate);
+                        sqlCommand.Parameters.AddWithValue("@PolyLine", command.PolyLine);
+                    
+                    
+                        connection.Open();
+                        sqlCommand.ExecuteNonQuery();
+
+                        return ICqsResult.Success();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return ICqsResult.Failure(e.Message);
+            }
+        }
+
         public async ValueTask<ICqsResult<List<Track_Get>>> ExecuteAsync(GetTrackQuery query)
         {
             try

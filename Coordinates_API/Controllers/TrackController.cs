@@ -8,6 +8,7 @@ using Coordinates_CQS_Domain.Queries.Track;
 using Coordinates_CQS_Domain.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Coordinates_API.Dtos.Track;
 
 namespace Coordinates_API.Controllers
 {
@@ -53,7 +54,7 @@ namespace Coordinates_API.Controllers
         }
 
         [HttpGet("GetTracks")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> GetTracks(
             [FromQuery] Guid? idTrack,
             [FromQuery] decimal? distance,
@@ -94,6 +95,36 @@ namespace Coordinates_API.Controllers
                 return Ok(result);
             }
             catch (Exception e)
+            {
+                return StatusCode(500, IApiResult.Failure(e.Message));
+            }
+        }
+
+        [HttpPut("UpdateTrack")]
+        [Authorize]
+        public async Task<IActionResult> UpdateTrack(TrackUpdate value)
+        {
+            try
+            {
+                UpdateTrackCommand newCommand = new(
+                    value.IdTrack,
+                    value.UpdatedBy,
+                    value.Distance,
+                    value.Ascent,
+                    value.Descent,
+                    value.Name, 
+                    value.IsPrivate,
+                    value.PolyLine);
+
+                ICqsResult cqsResult = _trackRepository.Execute(newCommand);
+                IApiResult result = cqsResult.ToIApiResult();
+
+                if(result.IsFailure)
+                    return BadRequest(result);
+
+                return Ok(result);
+            }
+            catch (Exception e )
             {
                 return StatusCode(500, IApiResult.Failure(e.Message));
             }

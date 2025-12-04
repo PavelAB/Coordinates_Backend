@@ -13,6 +13,7 @@ namespace Coordinates_CQS_Domain.Repositories
 {
     public interface ITrackRepository: 
         ICommandHandler<CreateTrackCommand>,
+        ICommandHandler<UpdateTrackCommand>,
         IAsyncQueryHandler<GetTrackQuery, List<Track_Get>>
     {
     }
